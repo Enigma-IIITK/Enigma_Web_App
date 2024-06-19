@@ -1,0 +1,101 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Hero.css */
+
+.hero-text {
+  font-family: 'Montserrat', sans-serif;
+  /* Add any additional styles for your text */
+}
+
+.bg-design {
+  background:
+        #0F172A;
+}
+.hero-bg {
+  background-image: url("/HeroStack.png");
+  background-size: cover;
+  background-position: center;
+  height: 40vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+html {
+  scroll-behavior: smooth;
+}
+
+
+.titleMain {
+  background-image: linear-gradient(#ffffff, #749bc5);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  
+  text-align: center;
+  font-weight: 500;
+}
+
+
+
+.vibrate-container {
+  position: relative;
+  
+}
+
+.vibrate-img {
+  position: relative;
+  animation: vibrate 0.2s infinite linear;
+}
+
+@keyframes vibrate {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-4px);
+  }
+}
+
+
+#scrollSection {
+  height: 100vh; /* Set an initial height for the section */
+  background-size: cover;
+  background-position: center;
+  transition: height 0.5s ease; /* Add a smooth transition for height changes */
+}
+
+
