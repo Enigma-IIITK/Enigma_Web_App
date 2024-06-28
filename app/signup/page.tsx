@@ -1,4 +1,4 @@
-import Login from '../components/login2';
+import Login from '../components/ui/signup';
 import Navbar from "../components/navbar";
 import Footer from "../components/footer";
 import '../login.css';
