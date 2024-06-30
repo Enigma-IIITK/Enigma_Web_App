@@ -1,30 +1,31 @@
 "use client"
 import React, { useState } from 'react';
-import { getAuth, signOut } from 'firebase/auth';
+// import { getAuth, signOut } from 'firebase/auth';
 
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const auth = getAuth();
+  // const auth = getAuth();
   const router = useRouter();
-  const user = auth.currentUser;
+  // const user = auth.currentUser;
+  const user = null;
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  const logout = () => {
-    signOut(auth)
-      .then(() => {
-        console.log("logged out");
-      })
-      .catch((error) => {
-        console.log(error.message);
-      });
-    router.push("/login");
-  };
+  // const logout = () => {
+  //   signOut(auth)
+  //     .then(() => {
+  //       console.log("logged out");
+  //     })
+  //     .catch((error) => {
+  //       console.log(error.message);
+  //     });
+  //   router.push("/login");
+  // };
 
   return (
     <nav className="border-gray-200 hero-text relative z-10">
@@ -111,7 +112,7 @@ const Navbar = () => {
               <li>
                 <a
                   href="/login"
-                  onClick={logout}
+                  // onClick={logout}
                   className="bg-transparent hover:bg-blue-600 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
                 >
                   Logout

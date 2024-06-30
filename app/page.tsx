@@ -2,8 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import About from './components/about';
-import Hero from './components/hero';
-import Navbar from './components/navbar';
+
 import Footer from './components/footer';
 import { HoverImageLinks } from './components/linkHover';
 import { Vortex } from './components/ui/vortex';

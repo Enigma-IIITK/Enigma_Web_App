@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 const signup = () => {
   return (
-    <div className="flex items-center justify-end min-h-screen bg-cover bg-center px-20"
+    <div className="flex items-center justify-end min-h-screen bg-cover bg-center px-8"
     style={{ backgroundImage: "url('random/background.jpg')" }}>
       <div className="w-full max-w-2xl p-12 space-y-6 bg-white bg-opacity-95 rounded-lg shadow-lg min-h-[425px]">
         <h2 className="text-4xl font-extrabold text-gray-900">Sign Up</h2>

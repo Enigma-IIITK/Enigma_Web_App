@@ -1,38 +1,10 @@
-/*
-import React from 'react';
-import Link from 'next/link';
-
-const Login2 = () => {
-  return (
-    <div className="flex flex-col items-center justify-center h-screen">
-      <h1 className="text-2xl font-bold mb-6">Login</h1>
-      <form className="flex flex-col w-80">
-        <label htmlFor="username" className="mb-2">Username</label>
-        <input type="text" id="username" name="username" className="mb-4 p-2 border rounded" required />
-        
-        <label htmlFor="password" className="mb-2">Password</label>
-        <input type="password" id="password" name="password" className="mb-4 p-2 border rounded" required />
-        
-        <button type="submit" className="bg-blue-500 text-white py-2 rounded mt-4">Login</button>
-      </form>
-      
-      <button className="bg-red-500 text-white py-2 rounded mt-4">Sign in using Google</button>
-      
-      <p className="mt-4">
-        Don't have an account? <Link href="/signup" className="text-blue-500">Sign up</Link>
-      </p>
-    </div>
-  );
-};
-export default Login2;
-*/
 import React from 'react';
 import Link from 'next/link';
 import { EyeIcon } from '@heroicons/react/24/outline';
 
 const Login = () => {
   return (
-    <div className="flex items-center justify-center min-h-screen bg-cover bg-left"
+    <div className="flex py-10 justify-center  bg-cover bg-left"
     style={{ backgroundImage: "url('random/background2.jpg')" }}>
       <div className="w-full max-w-md p-8 space-y-6 bg-white bg-opacity-100 rounded-lg shadow-lg">
         <h2 className="text-3xl font-extrabold text-center text-gray-900">Sign in</h2>

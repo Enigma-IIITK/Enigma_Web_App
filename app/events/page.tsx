@@ -1,13 +1,11 @@
 'use client'
 import React, { useEffect, useState } from "react";
-import Navbar from "../components/navbar";
 import Footer from "../components/footer";
-import CurrentEvent from "../components/currentEvent";
-import PinnedSection from "../components/PinnedSection";
-import EventsList from "../components/EventList";
 import NavBar2 from "../components/navbar2";
 import Carousel from "../components/carousel";
 import ImageStack from "../components/sm_carousel";
+import EventHeader from "../components/EventHeader";
+import EventFooter from "../components/EventFooter";
 
 const Page: React.FC = () => {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
@@ -30,24 +28,14 @@ const Page: React.FC = () => {
   }, []);
 
   return (
-    <div className="relative overflow-hidden">
+     <>
       <NavBar2 />
-
-      {!isSmallScreen ? (
-        <Carousel />
-      ) : (
-        <ImageStack/>
-      )}
-
-      {/* <CurrentEvent/>
-      <hr />
-      <PinnedSection/>
-      <EventsList/> */}
-
+      <EventHeader />
+      <EventFooter/>
       <div className="h-[20vh]">&nbsp;</div>
-     
+
       <Footer />
-    </div>
+    </>
   );
 };
 

@@ -58,7 +58,7 @@ const People = ()=>{
                     
 
                 </div>
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 py-8">
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 py-4">
                     
                     <div className="col-span-1 lg:col-span-1 row-span-1 relative">
                         <img
