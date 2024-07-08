@@ -6,7 +6,7 @@ import {
 } from 'firebase/auth';
 import firebase_app from './config';
 
-const auth = getAuth(firebase_app);
+export const auth = getAuth(firebase_app);
 
 export const AuthContext = React.createContext({});
 
@@ -15,8 +15,9 @@ export const useAuthContext = () => React.useContext(AuthContext);
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = React.useState(null);
   const [loading, setLoading] = React.useState(true);
+  
   function logout() {
-    console.log("hello");
+    //console.log("hello");
     setUser(null);
   }
 

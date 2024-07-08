@@ -88,18 +88,7 @@ const Carousel: React.FC = () => {
         </motion.div>
         
       ))}
-       {/* <button
-        className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-transparent border-none outline-none cursor-pointer z-20"
-        onClick={() => handleItemClick(centerIndex > 0 ? centerIndex - 1 : items.length - 1)}
-      >
-        <img src="/random/left_arrow.png" alt="Left Arrow" className="w-10 h-10" />
-      </button> */}
-      {/* <button
-        className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-transparent border-none outline-none cursor-pointer z-20"
-        onClick={() => handleItemClick(centerIndex < items.length - 1 ? centerIndex + 1 : 0)}
-      >
-        <img src="/random/right_arrow.png" alt="Right Arrow" className="w-10 h-10" />
-      </button> */}
+      
     </div>
   );
 };
