@@ -98,31 +98,31 @@ const signup = () => {
       }
 
 
-      <div className="w-full max-w-2xl p-12 space-y-6  backdrop-blur-md bg-opacity-95 rounded-lg shadow-lg min-h-[425px]">
-        <h2 className="text-4xl font-extrabold text-gray-900">Sign Up</h2>
-        <p className="text-lg text-gray-600">Become part of the Enigma community!</p>
+      <div className="w-full max-w-2xl p-12 space-y-6 bg-black bg-opacity-50 rounded-lg shadow-lg min-h-[425px]">
+        <h2 className="text-4xl font-extrabold text-black-500">Sign Up</h2>
+        <p className="text-lg text-gray-400">Become part of the Enigma community!</p>
         <form className="mt-8 space-y-6" onSubmit={signUpHandler}>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
             
             <div className='sm:col-span-2'>
-              <label htmlFor="email" className="block text-sm font-medium text-black">Email</label>
+              <label htmlFor="email" className="block text-sm font-medium text-white">Email</label>
               <input
                 type="email"
                 id="email"
                 name="email"
-                className="block w-full px-3 py-2 mt-1 text-black border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500"
+                className="block w-full px-3 py-2 mt-1 text-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500"
                 placeholder="Enter your email"
                 required
                 autoFocus onChange={(e) => setEmail(e.target.value)}
               />
             </div>
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-black">Password</label>
+              <label htmlFor="password" className="block text-sm font-medium text-white">Password</label>
               <input
                 type="password"
                 id="password"
                 name="password"
-                className="block w-full px-3 py-2 mt-1 text-black border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500"
+                className="block w-full px-3 py-2 mt-1 text-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500"
                 placeholder="******************"
                 required
                 onChange={(e) => setPassword(e.target.value)}
@@ -142,12 +142,12 @@ const signup = () => {
           </div>
           <div className="flex items-center justify-between mt-6">
             <div className="text-sm">
-              <Link href="/login"className="font-medium text-green-600 hover:text-green-500">Already have an account? Sign In</Link>
+              <Link href="/login"className="font-medium text-pink-500 hover:text-pink-700">Already have an account? Sign In</Link>
             </div>
             <div>
               <button
                 type="submit"
-                className="px-4 py-2 text-sm font-medium text-white bg-green-600 border border-transparent rounded-md shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                className="px-4 py-2 text-sm font-medium text-white bg-violet-600 border border-transparent rounded-md shadow-sm hover:bg-violet-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
               >
                 Sign Up
               </button>
