@@ -99,8 +99,8 @@ const Login = () => {
           <></>
       }
 
-      <div className="w-full max-w-md p-8 space-y-6 backdrop-blur-md bg-opacity-100 rounded-lg shadow-lg">
-        <h2 className="text-3xl font-extrabold text-center text-gray-900">Sign in</h2>
+      <div className="w-full max-w-md p-8 space-y-6 bg-black  bg-opacity-50 rounded-lg shadow-lg">
+        <h2 className="text-3xl font-extrabold text-center text-gray-100">Sign in</h2>
         <form className="mt-8 space-y-6"  onSubmit={signInHandler}>
           <div className="space-y-4">
             <div>
@@ -111,7 +111,7 @@ const Login = () => {
                   id="email"
                   name="email"
                   className="w-full px-3 py-2 text-black border border-gray-700 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500"
-                  placeholder="email"
+                  placeholder="Email"
                   required
                   autoFocus onChange={(e) => setEmail(e.target.value)}
                 />
@@ -135,19 +135,19 @@ const Login = () => {
           </div>
           <div className="flex items-center justify-between">
             <div className="text-sm">
-              <a href="#" className="font-medium text-green-600 hover:text-green-500">Forgot your password?</a>
+              <a href="#" className="font-medium text-violet-500 hover:text-violet-300">Forgot your password?</a>
             </div>
           </div>
           <div>
             <button
               type="submit"
-              className="w-full px-4 py-2 text-sm font-medium text-white bg-green-600 border border-transparent rounded-md shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+              className="w-full px-4 py-2 text-sm font-medium text-white bg-violet-400 border border-transparent rounded-md shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
               Sign in
             </button>
           </div>
         </form>
         <div className="relative flex justify-center text-sm">
-          <span className="px-2 bg-white text-gray-500">Or</span>
+          <span className="px-2 bg-black bg-opacity-50 text-gray-100">Or</span>
         </div>
         <div className="flex justify-center space-x-4">
           <button className="flex items-center justify-center w-10 h-10 bg-gray-100 rounded-full hover:bg-gray-200">
@@ -160,7 +160,7 @@ const Login = () => {
           </button>
         </div>
         <p className="text-sm text-center text-gray-600">
-          Don't have an account? <Link href="/signup" className="font-medium text-green-600 hover:text-green-500">Sign up</Link>
+          Don't have an account? <Link href="/signup" className="font-medium text-violet-500 hover:text-violet-500">Sign up</Link>
         </p>
       </div>
     </div>
