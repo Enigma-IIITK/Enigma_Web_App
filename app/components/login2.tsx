@@ -1,5 +1,5 @@
 "use client"
-import React from 'react';
+import React, {useEffect} from 'react';
 import Link from 'next/link';
 import { EyeIcon } from '@heroicons/react/24/outline';
 import { useRouter } from "next/navigation";
@@ -8,6 +8,8 @@ import signUp from "../firebase/signup";
 import signIn from "../firebase/signin";
 import addData from "../firebase/addData";
 import { useAuthContext } from "../firebase/AuthContext";
+import { onAuthStateChanged, signOut } from 'firebase/auth';
+import { auth } from '../firebase/AuthContext';
 
 const Login = () => {
 
@@ -40,6 +42,16 @@ const Login = () => {
 
 
   }
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+        if (user) {
+          router.push('/dashboard'); 
+        }
+    });
+
+    return () => unsubscribe();
+}, [router]);
 
   const signUpHandler = async (event) => {
     event.preventDefault()

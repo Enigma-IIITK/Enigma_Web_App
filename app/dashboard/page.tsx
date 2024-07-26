@@ -67,7 +67,8 @@ export default function Dashboard() {
     }
 
     return (
-        <>
+        // bg-[url('/random/dashboard_bg.png')]
+        <div className=" bg-cover">
             <button
                 onClick={toggleSidebar}
                 aria-controls="sidebar-multi-level-sidebar"
@@ -238,7 +239,7 @@ export default function Dashboard() {
                             </select>
                         </div>
                         <br />
-                        <TeamGrid year="2024" />
+                        <TeamGrid year={year} />
                     </div>
                     : null}
 
@@ -250,6 +251,6 @@ export default function Dashboard() {
 
                 {activeTab == "Certificates" ? <Certificates /> : null}
             </div>
-        </>
+        </div>
     );
 }

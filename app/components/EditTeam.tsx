@@ -4,17 +4,17 @@ import { BentoGrid, BentoGridItem } from "./ui/bento-grid1";
 import { getTeamData, updateTeamPhoto, addTeamData } from "../firebase/addData"; // Adjust the import path as needed
 import { Edit2Icon, PlusIcon } from "lucide-react";
 
-export default function TeamGrid({ year }) {
+export default function TeamGrid({ year = "2024" }) {
     const [items, setItems] = useState([]);
     const [error, setError] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [formData, setFormData] = useState({ name: "", title: "", image: null,year:"" });
+    const [formData, setFormData] = useState({ name: "", title: "Club Lead", image: null, year: "" });
     const [selectedItemId, setSelectedItemId] = useState(null);
 
     const roles = [
-        "Club Lead", "Tech Lead", "Design Lead", "PR Lead", 
-        "Research Lead", "Creative Lead", "Tech Sub Lead", 
-        "Design Sub Lead", "PR Sub Lead", "Research Sub Lead", 
+        "Club Lead", "Tech Lead", "Design Lead", "PR Lead",
+        "Research Lead", "Creative Lead", "Tech Sub Lead",
+        "Design Sub Lead", "PR Sub Lead", "Research Sub Lead",
         "Creative Sub Lead"
     ];
 
@@ -24,7 +24,10 @@ export default function TeamGrid({ year }) {
             if (error) {
                 setError(error);
             } else {
-                setItems(result);
+                const sortedItems = result.sort((a, b) => {
+                    return roles.indexOf(a.title) - roles.indexOf(b.title);
+                });
+                setItems(sortedItems);
             }
         }
 
@@ -43,7 +46,10 @@ export default function TeamGrid({ year }) {
                 if (error) {
                     setError(error);
                 } else {
-                    setItems(result);
+                    const sortedItems = result.sort((a, b) => {
+                        return roles.indexOf(a.title) - roles.indexOf(b.title);
+                    });
+                    setItems(sortedItems);
                 }
             }
         }
@@ -60,12 +66,12 @@ export default function TeamGrid({ year }) {
 
     const handleFormSubmit = async (e) => {
         e.preventDefault();
-        const { name, title, image } = formData;
+        const { name, title, year, image } = formData;
         if (selectedItemId) {
             // Update existing item logic if needed
         } else {
             // Add new item logic
-            const { result, error } = await addTeamData("team", { name, title });
+            const { result, error } = await addTeamData("team", { name, title, year });
             if (error) {
                 setError(error);
             } else if (image && result.id) {
@@ -74,15 +80,24 @@ export default function TeamGrid({ year }) {
                     setError(uploadError);
                 }
             }
-            setFormData({ name: "", title: "", image: null ,year:""});
+            setFormData({ name: "", title: "", image: null, year: "" });
             setIsModalOpen(false);
             const { result: updatedItems, error: fetchError } = await getTeamData(year);
             if (fetchError) {
                 setError(fetchError);
             } else {
-                setItems(updatedItems);
+                const sortedItems = updatedItems.sort((a, b) => {
+                    return roles.indexOf(a.title) - roles.indexOf(b.title);
+                });
+                setItems(sortedItems);
             }
         }
+    };
+
+    const openEditModal = (item) => {
+        setSelectedItemId(item.id);
+        setFormData({ name: item.name, title: item.title, image: null, year: item.year });
+        setIsModalOpen(true);
     };
 
     if (error) {
@@ -99,32 +114,18 @@ export default function TeamGrid({ year }) {
                         description={
                             <div className="grid grid-cols-2">
                                 <span className="col-span-1">
-                                    {item.title}
+                                    {item.title} (Click to Edit)
                                 </span>
-                                <div className="col-span-1">
-                                    <input
-                                        type="file"
-                                        accept="image/*"
-                                        className="hidden"
-                                        id={`file-input-${item.id}`}
-                                        onChange={(event) => handleFileChange(event, item.id)}
-                                    />
-                                    <label
-                                        htmlFor={`file-input-${item.id}`}
-                                        className="mt-2 inline-block backdrop-blur-md text-white font-medium px-4 rounded cursor-pointer"
-                                    >
-                                        <Edit2Icon />
-                                    </label>
-                                </div>
                             </div>
                         }
                         header={
-                            <div>
-                                <img src={item.path} alt={item.name} className="flex flex-1 w-full h-full min-h-[6rem] rounded-xl" />
+                            <div className="w-full h-52 overflow-hidden rounded-xl flex items-center justify-center">
+                                <img src={item.path} alt={item.name} className="w-full h-full object-cover rounded-xl" />
                             </div>
                         }
                         className={item.className || "md:col-span-1"}
                         icon=""
+                        onClick={() => openEditModal(item)}
                     />
                 ))}
                 <div className="flex items-center justify-center w-full h-20 bg-gray-200 rounded-lg cursor-pointer" onClick={() => { setIsModalOpen(true); setSelectedItemId(null); }}>
@@ -165,7 +166,7 @@ export default function TeamGrid({ year }) {
                                     </div>
                                     <div>
                                         <label htmlFor="year" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Year</label>
-                                        <input type="text" name="year" id="year" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="John Doe" required value={formData.year} onChange={handleInputChange} />
+                                        <input type="text" name="year" id="year" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="2024" required value={formData.year} onChange={handleInputChange} />
                                     </div>
                                     <div>
                                         <label htmlFor="image" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Member Image</label>
@@ -181,7 +182,3 @@ export default function TeamGrid({ year }) {
         </>
     );
 }
-
-TeamGrid.defaultProps = {
-    year: "2024", // default year
-};
