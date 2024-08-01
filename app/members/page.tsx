@@ -11,7 +11,9 @@ import EventHead from '../components/EditEvents';
 import BlogTable from '../components/BlogList';
 import UserTable from '../components/UsersList';
 import Certificates from '../components/Certificates';
+import Profile from '../components/profile';
 import { getData } from '../firebase/addData';
+import BlogEditor from '../components/editBlog';
 
 export default function Dashboard() {
     const [loading, setLoading] = useState(true);
@@ -20,7 +22,10 @@ export default function Dashboard() {
 
     const [isOpen, setIsOpen] = useState(false);
     const [isSidebarOpen, setIsSidebarOpen] = useState(!window.matchMedia("(min-width: 768px)").matches);
-    const [activeTab, setActiveTab] = useState("Dashboard");
+    const [activeTab, setActiveTab] = useState("Profile");
+    const [user_email,setUserEmail] = useState("")
+    const [user_name,setUserName] = useState("")
+
 
     const [year, setYear] = useState("2024");
 
@@ -36,7 +41,9 @@ export default function Dashboard() {
         setIsSidebarOpen(!isSidebarOpen);
     };
     
-
+    const handleCreateBlog = () => {
+        setActiveTab('Create_Blog');
+      };
 
     const handleLogout = async () => {
         setActiveTab("Logout")
@@ -58,15 +65,15 @@ export default function Dashboard() {
                 // Fetch user data from Firestore
                 try {
                     const userData = await getData("users", user.uid);
+                    
+                    setUserEmail(userData.result.email);
                     console.log("Member:", userData.result.member);
                     console.log("Admin:", userData.result.admin);
 
-                    if(!userData.result.admin && !userData.result.member){
-                        router.push('/user_dashboard')
+                    if(userData.result.admin){
+                        router.push('/dashboard')
                     }
-                    if(!userData.result.admin && userData.result.member){
-                        router.push('/members')
-                    }
+                    
                     
                 } catch (error) {
                     console.error("Error fetching user data: ", error);
@@ -128,11 +135,11 @@ export default function Dashboard() {
                         <li>
                             <a
                                 href="#"
-                                onClick={() => setActiveTab("Members")}
-                                className={`flex items-center p-2 rounded-lg hover:bg-gray-800 group ${activeTab === "Members" ? "bg-gray-900" : "text-gray-900"}`}
+                                onClick={() => setActiveTab("Profile")}
+                                className={`flex items-center p-2 rounded-lg hover:bg-gray-800 group ${activeTab === "Profile" ? "bg-gray-900" : "text-gray-900"}`}
                             >
                                 <Users />
-                                <span className="ms-3">Members</span>
+                                <span className="ms-3">Profile</span>
                             </a>
                         </li>
                         <li>
@@ -158,31 +165,11 @@ export default function Dashboard() {
                         <li>
                             <a
                                 href="#"
-                                onClick={() => setActiveTab("Blogs")}
-                                className={`flex items-center p-2 rounded-lg hover:bg-gray-800 group ${activeTab === "Blogs" ? "bg-gray-900" : "text-gray-900"}`}
+                                onClick={() => setActiveTab("Your Blogs")}
+                                className={`flex items-center p-2 rounded-lg hover:bg-gray-800 group ${activeTab === "Your Blogs" ? "bg-gray-900" : "text-gray-900"}`}
                             >
                                 <Newspaper />
-                                <span className="ms-3">Blogs</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a
-                                href="#"
-                                onClick={() => setActiveTab("Users")}
-                                className={`flex items-center p-2 rounded-lg hover:bg-gray-800 group ${activeTab === "Users" ? "bg-gray-900" : "text-gray-900"}`}
-                            >
-                                <UserRoundPlus />
-                                <span className="ms-3">Users</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a
-                                href="#"
-                                onClick={() => setActiveTab("Certificates")}
-                                className={`flex items-center p-2 rounded-lg hover:bg-gray-800 group ${activeTab === "Certificates" ? "bg-gray-900" : "text-gray-900"}`}
-                            >
-                                <TicketCheck />
-                                <span className="ms-3">Certificates</span>
+                                <span className="ms-3">Your Blogs</span>
                             </a>
                         </li>
                         <li>
@@ -200,7 +187,7 @@ export default function Dashboard() {
             </aside>
 
             <div className="p-4 sm:ml-64">
-                {
+            {
                     activeTab == "Dashboard" ?
 
                         <div className="p-4 border-2 border-gray-200 border-dashed rounded-lg">
@@ -236,9 +223,7 @@ export default function Dashboard() {
                             </div>
                         </div>
                         : null}
-
-                {activeTab == "Members" ? <MemberTable /> : null}
-
+                {activeTab == "Profile" ? <Profile /> : null}
                 {activeTab == "Team" ?
                     <div className='h-max'>
                         <div className="flex justify-center mt-8">
@@ -261,12 +246,19 @@ export default function Dashboard() {
                     : null}
 
                 {activeTab == "Events" ? <EventHead /> : null}
-
-                {activeTab == "Blogs" ? <BlogTable author_email="" /> : null}
-
-                {activeTab == "Users" ? <UserTable /> : null}
-
-                {activeTab == "Certificates" ? <Certificates /> : null}
+                {activeTab == "Your Blogs" ? 
+                 <>
+                 <button
+                   onClick={handleCreateBlog}
+                   className="mb-4 px-4 py-2 bg-blue-500 text-white rounded-md"
+                 >
+                   Create
+                 </button>
+                 <BlogTable author_email={user_email}/>
+               </>
+                : null}
+                {activeTab == "Create_Blog" ? <BlogEditor author_email={user_email}/> : null}
+                {activeTab == "View_Blog" ? <BlogEditor author_email={user_email}/> : null}
             </div>
         </div>
     );

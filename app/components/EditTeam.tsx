@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { cn } from "../utils/cn";
 import { BentoGrid, BentoGridItem } from "./ui/bento-grid1";
-import { getTeamData, updateTeamPhoto, addTeamData } from "../firebase/addData"; // Adjust the import path as needed
+import { getTeamData, updateTeamPhoto, addTeamData, editTeamData } from "../firebase/addData"; // Adjust the import path as needed
 import { Edit2Icon, PlusIcon } from "lucide-react";
 
 export default function TeamGrid({ year = "2024" }) {
@@ -68,7 +68,16 @@ export default function TeamGrid({ year = "2024" }) {
         e.preventDefault();
         const { name, title, year, image } = formData;
         if (selectedItemId) {
-            // Update existing item logic if needed
+            // Update existing item logic
+            const { result, error } = await editTeamData(selectedItemId, { name, title, year });
+            if (error) {
+                setError(error);
+            } else if (image) {
+                const { error: uploadError } = await updateTeamPhoto(selectedItemId, image);
+                if (uploadError) {
+                    setError(uploadError);
+                }
+            }
         } else {
             // Add new item logic
             const { result, error } = await addTeamData("team", { name, title, year });
@@ -80,17 +89,18 @@ export default function TeamGrid({ year = "2024" }) {
                     setError(uploadError);
                 }
             }
-            setFormData({ name: "", title: "", image: null, year: "" });
-            setIsModalOpen(false);
-            const { result: updatedItems, error: fetchError } = await getTeamData(year);
-            if (fetchError) {
-                setError(fetchError);
-            } else {
-                const sortedItems = updatedItems.sort((a, b) => {
-                    return roles.indexOf(a.title) - roles.indexOf(b.title);
-                });
-                setItems(sortedItems);
-            }
+        }
+
+        setFormData({ name: "", title: "Club Lead", image: null, year: "" });
+        setIsModalOpen(false);
+        const { result: updatedItems, error: fetchError } = await getTeamData(year);
+        if (fetchError) {
+            setError(fetchError);
+        } else {
+            const sortedItems = updatedItems.sort((a, b) => {
+                return roles.indexOf(a.title) - roles.indexOf(b.title);
+            });
+            setItems(sortedItems);
         }
     };
 

@@ -1,29 +1,49 @@
-import React, { useState } from 'react';
+"use client"
+import React, { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
+import { Bebas_Neue } from '@next/font/google';
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from '../firebase/addData'; 
 
-import {Bebas_Neue} from '@next/font/google'
+// Firebase configuration and initialization should be done in a separate file (e.g., firebase.js or db.js)
 
 export const Bebas = Bebas_Neue({
-    subsets: ['latin'],
-    display: 'swap',
-    weight: '400'
-  });
+  subsets: ['latin'],
+  display: 'swap',
+  weight: '400'
+});
 
 const Carousel: React.FC = () => {
-  const initialItems = [
-    '/events/inaguration.jpeg',
-    '/events/poster_hackathon.png',
-    '/events/session1.png',
-    '/events/session2.png',
-    '/events/session3.png',
-  ];
-  const headings = {
-    "/events/inaguration.jpeg": "Club Inauguration",
-    "/events/poster_hackathon.png": "AI Hackathon",
-    "/events/session1.png": "O TO HERO IN REINFORCEMENT LEARNING",
-    "/events/session2.png": "DEEP DIVE INTO NEAT AI",
-    "/events/session3.png": "HANDS ON XPERIENCE",
-  }
+  const [initialItems, setInitialItems] = useState<string[]>([]);
+  const [headings, setHeadings] = useState<{ [key: string]: string }>({});
+
+  useEffect(() => {
+    const fetchEvents = async () => {
+      const eventsCollection = collection(db, 'events');
+      const eventsSnapshot = await getDocs(eventsCollection);
+      let eventsList = eventsSnapshot.docs.map(doc => doc.data());
+
+      const now = new Date();
+      eventsList.filter(event => new Date(`${event.date} ${event.time}`) > now);
+       
+
+      const items: string[] = [];
+      const headings: { [key: string]: string } = {};
+
+      eventsList.forEach(event => {
+        if (event.imageUrl && event.title) {
+          items.push(event.imageUrl);
+          headings[event.imageUrl] = event.title;
+        }
+      });
+
+      setInitialItems(items);
+      setHeadings(headings);
+    };
+
+    fetchEvents();
+  }, []);
+
 
   const [items, setItems] = useState<string[]>(initialItems);
   const [centerIndex, setCenterIndex] = useState<number>(2);

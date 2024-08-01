@@ -38,7 +38,7 @@ const Login = () => {
     console.log(result);
 
 
-    return router.push("/dashboard")
+    return router.push("/user_dashboard")
 
 
   }

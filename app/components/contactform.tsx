@@ -6,7 +6,7 @@ import { cn } from "../utils/cn";
 import {
   IconBrandGithub,
   IconBrandGoogle,
-  IconBrandOnlyfans,
+  
 } from "@tabler/icons-react";
 
 export function SignupFormDemo() {

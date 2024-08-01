@@ -4,22 +4,42 @@ import { getFirestore, doc, setDoc, getDoc, getDocs, updateDoc, query, where,col
 
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
-const db = getFirestore(firebase_app);
+export const db = getFirestore(firebase_app);
 const storage = getStorage(firebase_app);
 
-export default async function addData(collection, id, data) {
+export default async function addData(collection_name, id, data, check = false) {
     let result = null;
     let error = null;
 
+    if (check) {
+        try {
+            
+            const q =  query(collection(db, "members"), where("email", "==", data.email));
+            const querySnapshot = await getDocs(q);
+            console.log(querySnapshot)
+            if (!querySnapshot.empty) {
+                data.member = true;
+            } else {
+                data.member = false;
+            }
+        } catch (e) {
+            error = e;
+            //return { result, error };
+            data.member = false;
+        }
+        data.admin = false;
+    }
+
     try {
-        result = await setDoc(doc(db, collection, id), data, {
+        result = await setDoc(doc(db, collection_name, id), data, {
             merge: true,
         });
     } catch (e) {
+        console.log(err)
         error = e;
     }
 
-    return { result, error };
+    return { result, error,data };
 }
 
 export async function getData(collection, id) {
@@ -154,3 +174,57 @@ export  async function addTeamData(collectionName, data, id = null) {
     return { result, error };
 }
 
+export const editTeamData = async (itemId, data) => {
+    try {
+        await updateDoc(doc(db, "team", itemId), data);
+        return { result: { id: itemId }, error: null };
+    } catch (error) {
+        return { result: null, error };
+    }
+};
+
+export const addBlog = async (blog) => {
+    try {
+      const docRef = await addDoc(collection(db, "Blogs"), blog);
+      console.log("Document written with ID: ", docRef.id);
+      return true;
+    } catch (e) {
+      console.error("Error adding document: ", e);
+      return false;
+    }
+  };
+
+
+export const getBlog = async (title) =>{
+    try{
+        const q = query(collection(db, "Blogs"), where("title", "==", title));
+        console.log(q)
+        const querySnapshot = await getDocs(q);
+        querySnapshot.forEach((doc) => {
+            result.push({ id: doc.id, ...doc.data() });
+        });
+    }
+    catch (e) {
+        console.error("Error getting documents: ", e);
+        error = e;
+    }
+
+    return { result, error };
+}
+
+export const topBlogs = async () => {
+    const result = [];
+    let error = null;
+    try {
+      const q = query(collection(db, "Blogs"), orderBy("createdAt", "desc"), limit(4));
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+        result.push({ id: doc.id, ...doc.data() });
+      });
+    } catch (e) {
+      console.error("Error getting top blogs: ", e);
+      error = e;
+    }
+  
+    return { result, error };
+  };

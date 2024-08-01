@@ -1,38 +1,44 @@
-/*
-export default function Page(){
-    return(
-        <>
-        <h1>Hello blog topics</h1>
-        </>
-    );
-}
-*/
 "use client";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { topBlogs } from '../firebase/addData'; // Adjust the import path as needed
 
 const Blog = () => {
   const [searchTerm, setSearchTerm] = useState('');
+  const [topBlogsList, setTopBlogsList] = useState([]);
+
+  useEffect(() => {
+    const fetchTopBlogs = async () => {
+      const { result, error } = await topBlogs();
+      if (error) {
+        console.error("Failed to fetch top blogs:", error);
+      } else {
+        setTopBlogsList(result);
+      }
+    };
+
+    fetchTopBlogs();
+  }, []);
 
   const topics = [
     {
       name: 'Technology',
       blogs: [
-        { title: 'The Future of AI', description: 'Exploring the advancements in artificial intelligence.', views:100 },
-        { title: 'Blockchain Basics', description: 'Understanding the fundamentals of blockchain technology.', views:30 },
+        { title: 'The Future of AI', description: 'Exploring the advancements in artificial intelligence.', views: 100 },
+        { title: 'Blockchain Basics', description: 'Understanding the fundamentals of blockchain technology.', views: 30 },
       ],
     },
     {
       name: 'Health',
       blogs: [
-        { title: 'Healthy Living Tips', description: 'Tips for maintaining a healthy lifestyle.', views:90 },
-        { title: 'Mental Health Awareness', description: 'Raising awareness about mental health.', views:100 },
+        { title: 'Healthy Living Tips', description: 'Tips for maintaining a healthy lifestyle.', views: 90 },
+        { title: 'Mental Health Awareness', description: 'Raising awareness about mental health.', views: 100 },
       ],
     },
     {
       name: 'Travel',
       blogs: [
-        { title: 'Top 10 Destinations', description: 'Must-visit places around the world.', views:93 },
-        { title: 'Travel on a Budget', description: 'How to travel without breaking the bank.', views:40 },
+        { title: 'Top 10 Destinations', description: 'Must-visit places around the world.', views: 93 },
+        { title: 'Travel on a Budget', description: 'How to travel without breaking the bank.', views: 40 },
       ],
     },
   ];
@@ -46,8 +52,7 @@ const Blog = () => {
   }));
 
   return (
-    <div className="min-h-screen bg-cover p-8"
-    style={{ backgroundImage: "url('random/background.jpg')" }}>
+    <div className="min-h-screen bg-cover p-8" style={{ backgroundImage: "url('random/background.jpg')" }}>
       <div className="max-w-4xl mx-auto">
         <h1 className="text-5xl text-gray-100 mb-6 font-serif">Trending Blogs</h1>
         <div className="relative mb-6">
@@ -58,6 +63,17 @@ const Blog = () => {
             value={searchTerm}
             onChange={e => setSearchTerm(e.target.value)}
           />
+        </div>
+        <h2 className="text-2xl font-bold text-gray-100 mb-4">Top Blogs</h2>
+        <div className="space-y-4 mb-8">
+          {topBlogsList.map(blog => (
+            <div key={blog.id} className="relative p-4 bg-black bg-opacity-60 rounded-lg shadow">
+              <h3 className="text-xl font-semibold text-gray-300">{blog.title}</h3>
+              <p className="text-gray-100">{blog.description}</p>
+              <div className="absolute top-4 right-4 text-gray-400">{blog.views} views</div>
+            </div>
+          ))}
+          {topBlogsList.length === 0 && <p className="text-gray-200">No top blogs available.</p>}
         </div>
         {filteredTopics.map(topic => (
           <div key={topic.name} className="mb-8">
