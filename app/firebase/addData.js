@@ -35,7 +35,7 @@ export default async function addData(collection_name, id, data, check = false) 
             merge: true,
         });
     } catch (e) {
-        console.log(err)
+        console.log(e)
         error = e;
     }
 

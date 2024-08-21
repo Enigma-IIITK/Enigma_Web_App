@@ -19,10 +19,14 @@ export default function Dashboard() {
     const router = useRouter();
 
     const [isOpen, setIsOpen] = useState(false);
-    const [isSidebarOpen, setIsSidebarOpen] = useState(!window.matchMedia("(min-width: 768px)").matches);
-    const [activeTab, setActiveTab] = useState("Dashboard");
-
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const [activeTab, setActiveTab] = useState("Members");
     const [year, setYear] = useState("2024");
+
+    // Client-side logic: Check for sidebar open state
+    useEffect(() => {
+        setIsSidebarOpen(!window.matchMedia("(min-width: 768px)").matches);
+    }, []);
 
     const handleYearChange = (event) => {
         setYear(event.target.value);
@@ -35,11 +39,9 @@ export default function Dashboard() {
     const toggleSidebar = () => {
         setIsSidebarOpen(!isSidebarOpen);
     };
-    
-
 
     const handleLogout = async () => {
-        setActiveTab("Logout")
+        setActiveTab("Logout");
         try {
             await signOut(auth);
             router.push('/login');
@@ -48,26 +50,24 @@ export default function Dashboard() {
         }
     };
 
-
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, async (user) => {
             if (user) {
                 setUser(user);
                 setLoading(false);
                 console.log(user);
-                // Fetch user data from Firestore
                 try {
                     const userData = await getData("users", user.uid);
                     console.log("Member:", userData.result.member);
                     console.log("Admin:", userData.result.admin);
 
-                    if(!userData.result.admin && !userData.result.member){
-                        router.push('/user_dashboard')
+                    if (!userData.result.admin && !userData.result.member) {
+                        router.push('/user_dashboard');
                     }
-                    if(!userData.result.admin && userData.result.member){
-                        router.push('/members')
+                    if (!userData.result.admin && userData.result.member) {
+                        router.push('/members');
                     }
-                    
+
                 } catch (error) {
                     console.error("Error fetching user data: ", error);
                 }
@@ -82,6 +82,7 @@ export default function Dashboard() {
     if (loading) {
         return <div>Loading...</div>;
     }
+
 
     return (
         // bg-[url('/random/dashboard_bg.png')]
@@ -112,10 +113,10 @@ export default function Dashboard() {
                                 aria-controls="dropdown-example"
                                 onClick={toggleSidebar}
                             >
-                                <span className="ms-3">Enigma</span>
+                                <span className="ms-3">Enigma</span> 
                             </button>
                         </li>
-                        <li>
+                        {/* <li>
                             <a
                                 href="#"
                                 onClick={() => setActiveTab("Dashboard")}
@@ -124,7 +125,7 @@ export default function Dashboard() {
                                 <LayoutDashboard />
                                 <span className="ms-3">Dashboard</span>
                             </a>
-                        </li>
+                        </li> */}
                         <li>
                             <a
                                 href="#"

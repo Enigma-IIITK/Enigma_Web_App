@@ -83,7 +83,7 @@ const Page: React.FC<PageProps> = ({ params }) => {
         <div className="mt-8">
           <h3 className="text-xl font-semibold mb-4">About Author</h3>
           <p className="text-gray-400">
-            Author is designed for publishers who want readers. That's why Author is fast, responsive, accessibility-ready, and...
+            Author is designed for publishers who want readers. That&apos;s why Author is fast, responsive, accessibility-ready, and...
           </p>
         </div>
       </div>

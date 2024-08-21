@@ -1,3 +1,4 @@
+"use client"
 import React, { useState, useEffect } from 'react';
 import { BadgePlus, Trash2 } from 'lucide-react';
 import { collection, query, getDocs, addDoc, updateDoc, doc, deleteDoc, getFirestore } from 'firebase/firestore';

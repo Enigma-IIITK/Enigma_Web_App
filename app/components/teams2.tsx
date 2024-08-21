@@ -7,7 +7,7 @@ import { collection, getDocs, query, where } from 'firebase/firestore';
 
 const roles = [
     "Club Lead", "Tech Lead", "Design Lead", "PR Lead",
-    "Research Lead", "Creative Lead", "Tech Sub Lead",
+    "Research Lead", "Creative Lead","Core Member", "Tech Sub Lead",
     "Design Sub Lead", "PR Sub Lead", "Research Sub Lead",
     "Creative Sub Lead"
 ];
@@ -39,7 +39,7 @@ export default function BentoGridSecondDemo() {
   }, [year]);
 
   return (
-    <div className="h-screen">
+    <div className="h-max min-h-screen">
       <div className="container mx-auto py-4">
         <div className="flex justify-center">
          

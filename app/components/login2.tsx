@@ -159,20 +159,20 @@ const Login = () => {
           </div>
         </form>
         <div className="relative flex justify-center text-sm">
-          <span className="px-2 bg-black bg-opacity-50 text-gray-100">Or</span>
+          {/* <span className="px-2 bg-black bg-opacity-50 text-gray-100">Or</span> */}
         </div>
         <div className="flex justify-center space-x-4">
           <button className="flex items-center justify-center w-10 h-10 bg-gray-100 rounded-full hover:bg-gray-200">
             <span className="sr-only">Sign in with Google</span>
-            <img src="/google-icon.svg" alt="Google icon" className="w-6 h-6" />
+            {/* <img src="/google-icon.svg" alt="Google icon" className="w-6 h-6" /> */}
           </button>
           <button className="flex items-center justify-center w-10 h-10 bg-gray-100 rounded-full hover:bg-gray-200">
             <span className="sr-only">Sign in with GitHub</span>
-            <img src="/github-icon.svg" alt="GitHub icon" className="w-6 h-6" />
+            {/* <img src="/github-icon.svg" alt="GitHub icon" className="w-6 h-6" /> */}
           </button>
         </div>
         <p className="text-sm text-center text-gray-600">
-          Don't have an account? <Link href="/signup" className="font-medium text-violet-500 hover:text-violet-500">Sign up</Link>
+          Don&apos;t have an account? <Link href="/signup" className="font-medium text-violet-500 hover:text-violet-500">Sign up</Link>
         </p>
       </div>
     </div>

@@ -127,7 +127,7 @@ const Login = () => {
             <div className="user_options-container">
                 <div className="user_options-text">
                     <div className="user_options-unregistered">
-                        <h2 className="user_unregistered-title">Aren't a member yet?</h2>
+                        <h2 className="user_unregistered-title">Aren&apos;t a member yet?</h2>
                         <p className="user_unregistered-text">Discover the AI Magic with us and fellow like-minded AI-ians.</p>
                         <button className="user_unregistered-signup" id="signup-button">Sign up</button>
                     </div>

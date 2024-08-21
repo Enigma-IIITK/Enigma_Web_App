@@ -1,80 +1,48 @@
 "use client";
 
 import { useEffect, useState } from 'react';
-import { useRouter } from "next/navigation";
+import { useRouter } from 'next/navigation';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { auth } from '../firebase/AuthContext'; // Adjust the path to your firebase.js file
-import { LayoutDashboard, Users, Group, Dices, TicketCheck, Newspaper, UserRoundPlus, LogOut } from 'lucide-react';
-import MemberTable from '../components/Members';
+import { LayoutDashboard, Users, Group, Dices, Newspaper, LogOut } from 'lucide-react';
+
 import TeamGrid from '../components/EditTeam';
 import EventHead from '../components/EditEvents';
 import BlogTable from '../components/BlogList';
-import UserTable from '../components/UsersList';
-import Certificates from '../components/Certificates';
 import Profile from '../components/profile';
-import { getData } from '../firebase/addData';
 import BlogEditor from '../components/editBlog';
+import { getData } from '../firebase/addData';
 
 export default function Dashboard() {
     const [loading, setLoading] = useState(true);
     const [user, setUser] = useState(null);
+    const [userEmail, setUserEmail] = useState("");
     const router = useRouter();
 
     const [isOpen, setIsOpen] = useState(false);
-    const [isSidebarOpen, setIsSidebarOpen] = useState(!window.matchMedia("(min-width: 768px)").matches);
+    const [isSidebarOpen, setIsSidebarOpen] = useState(true);
     const [activeTab, setActiveTab] = useState("Profile");
-    const [user_email,setUserEmail] = useState("")
-    const [user_name,setUserName] = useState("")
-
-
     const [year, setYear] = useState("2024");
 
-    const handleYearChange = (event) => {
-        setYear(event.target.value);
-    };
-
-    const toggleDropdown = () => {
-        setIsOpen(!isOpen);
-    };
-
-    const toggleSidebar = () => {
-        setIsSidebarOpen(!isSidebarOpen);
-    };
-    
-    const handleCreateBlog = () => {
-        setActiveTab('Create_Blog');
-      };
-
-    const handleLogout = async () => {
-        setActiveTab("Logout")
-        try {
-            await signOut(auth);
-            router.push('/login');
-        } catch (error) {
-            console.error("Error signing out: ", error);
-        }
-    };
-
-
     useEffect(() => {
+        const handleResize = () => {
+            setIsSidebarOpen(window.matchMedia("(min-width: 768px)").matches);
+        };
+
+        window.addEventListener("resize", handleResize);
+        handleResize();
+
         const unsubscribe = onAuthStateChanged(auth, async (user) => {
             if (user) {
                 setUser(user);
                 setLoading(false);
-                console.log(user);
-                // Fetch user data from Firestore
+
                 try {
                     const userData = await getData("users", user.uid);
-                    
                     setUserEmail(userData.result.email);
-                    console.log("Member:", userData.result.member);
-                    console.log("Admin:", userData.result.admin);
-
-                    if(userData.result.admin){
-                        router.push('/dashboard')
+                    if (userData.result.admin) {
+                        router.push('/dashboard');
                     }
-                    
-                    
                 } catch (error) {
                     console.error("Error fetching user data: ", error);
                 }
@@ -83,12 +51,38 @@ export default function Dashboard() {
             }
         });
 
-        return () => unsubscribe();
+        return () => {
+            window.removeEventListener("resize", handleResize);
+            unsubscribe();
+        };
     }, [router]);
+
+    const handleYearChange = (event) => {
+        setYear(event.target.value);
+    };
+
+    const toggleSidebar = () => {
+        setIsSidebarOpen(!isSidebarOpen);
+    };
+
+    const handleCreateBlog = () => {
+        setActiveTab('Create_Blog');
+    };
+
+    const handleLogout = async () => {
+        setActiveTab("Logout");
+        try {
+            await signOut(auth);
+            router.push('/login');
+        } catch (error) {
+            console.error("Error signing out: ", error);
+        }
+    };
 
     if (loading) {
         return <div>Loading...</div>;
     }
+
 
     return (
         // bg-[url('/random/dashboard_bg.png')]
@@ -119,7 +113,7 @@ export default function Dashboard() {
                                 aria-controls="dropdown-example"
                                 onClick={toggleSidebar}
                             >
-                                <span className="ms-3">Enigma</span>
+                                <span className="ms-3">Enigma</span><span className="ms-3">Memeber</span>
                             </button>
                         </li>
                         <li>
@@ -254,11 +248,11 @@ export default function Dashboard() {
                  >
                    Create
                  </button>
-                 <BlogTable author_email={user_email}/>
+                 <BlogTable author_email={userEmail}/>
                </>
                 : null}
-                {activeTab == "Create_Blog" ? <BlogEditor author_email={user_email}/> : null}
-                {activeTab == "View_Blog" ? <BlogEditor author_email={user_email}/> : null}
+                {activeTab == "Create_Blog" ? <BlogEditor author_email={userEmail}/> : null}
+                {activeTab == "View_Blog" ? <BlogEditor author_email={userEmail}/> : null}
             </div>
         </div>
     );

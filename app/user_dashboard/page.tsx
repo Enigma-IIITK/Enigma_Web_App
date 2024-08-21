@@ -1,19 +1,15 @@
-"use client";
-
+"use client"
 import { useEffect, useState } from 'react';
 import { useRouter } from "next/navigation";
 import { onAuthStateChanged, signOut } from 'firebase/auth';
-import { auth } from '../firebase/AuthContext'; // Adjust the path to your firebase.js file
+import { auth } from '../firebase/AuthContext';
 import { LayoutDashboard, Users, Group, Dices, TicketCheck, Newspaper, UserRoundPlus, LogOut } from 'lucide-react';
-import MemberTable from '../components/Members';
-import TeamGrid from '../components/EditTeam';
-import EventHead from '../components/EditEvents';
-import BlogTable from '../components/BlogList';
-import UserTable from '../components/UsersList';
-import Certificates from '../components/Certificates';
-import Profile from '../components/profile';
 import { getData } from '../firebase/addData';
-import BlogEditor from '../components/editBlog';
+import dynamic from 'next/dynamic';
+
+const BlogTable = dynamic(() => import('../components/BlogList'), { ssr: false });
+const Profile = dynamic(() => import('../components/profile'), { ssr: false });
+const BlogEditor = dynamic(() => import('../components/editBlog'), { ssr: false });
 
 export default function Dashboard() {
     const [loading, setLoading] = useState(true);
@@ -21,13 +17,16 @@ export default function Dashboard() {
     const router = useRouter();
 
     const [isOpen, setIsOpen] = useState(false);
-    const [isSidebarOpen, setIsSidebarOpen] = useState(!window.matchMedia("(min-width: 768px)").matches);
+    const [isSidebarOpen, setIsSidebarOpen] = useState(true);
     const [activeTab, setActiveTab] = useState("Profile");
-    const [user_email,setUserEmail] = useState("")
-    const [user_name,setUserName] = useState("")
-
+    const [user_email, setUserEmail] = useState("")
+    const [user_name, setUserName] = useState("")
 
     const [year, setYear] = useState("2024");
+
+    useEffect(() => {
+        setIsSidebarOpen(!window.matchMedia("(min-width: 768px)").matches);
+    }, []);
 
     const handleYearChange = (event) => {
         setYear(event.target.value);
@@ -43,7 +42,7 @@ export default function Dashboard() {
     
     const handleCreateBlog = () => {
         setActiveTab('Create_Blog');
-      };
+    };
 
     const handleLogout = async () => {
         setActiveTab("Logout")
@@ -55,14 +54,12 @@ export default function Dashboard() {
         }
     };
 
-
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, async (user) => {
             if (user) {
                 setUser(user);
                 setLoading(false);
                 console.log(user);
-                // Fetch user data from Firestore
                 try {
                     const userData = await getData("users", user.uid);
                     
@@ -74,7 +71,6 @@ export default function Dashboard() {
                         router.push('/dashboard')
                     }
                     else if(userData.result.member){
-                        
                         router.push('/members')
                     }
                     
@@ -92,7 +88,6 @@ export default function Dashboard() {
     if (loading) {
         return <div>Loading...</div>;
     }
-
     return (
         // bg-[url('/random/dashboard_bg.png')]
         <div className=" bg-cover">

@@ -13,7 +13,7 @@ interface PageProps {
 }
 
 
-export const Page: React.FC<PageProps> = ({ params }) => {
+const Page: React.FC<PageProps> = ({ params }) => {
   const eventId = decodeURIComponent(params.id);
   const [email, setEmail] = useState("");
 
@@ -91,3 +91,6 @@ const LabelInputContainer = ({
     </div>
   );
 };
+
+
+export default Page;

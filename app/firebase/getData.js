@@ -19,10 +19,16 @@ export default async function getDoument(collection, id) {
 
 
 export const getData = async (collectionName) => {
-    const querySnapshot = await getDocs(collection(db, collectionName));
-    const data = [];
-    querySnapshot.forEach((doc) => {
-        data.push({ id: doc.id, ...doc.data() });
-    });
-    return data;
+    try{
+        const querySnapshot = await getDocs(collection(db, collectionName));
+        const data = [];
+        querySnapshot.forEach((doc) => {
+            data.push({ id: doc.id, ...doc.data() });
+        });
+        return data;
+    }
+    catch(err){
+        console.log(err);
+        return err;
+    }
 };

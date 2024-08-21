@@ -1,3 +1,4 @@
+"use client"
 import React, { useState, useEffect } from 'react';
 import { UserPlus2 } from 'lucide-react';
 import { getData } from '../firebase/getData'; // Adjust the path as necessary to your Firebase config file
@@ -9,6 +10,7 @@ const UserTable: React.FC = () => {
     useEffect(() => {
         const fetchUsers = async () => {
             const userData = await getData('users'); // Assuming getData is a function to fetch data from 'Users' collection
+            console.log(userData);
             setUsers(userData);
         };
 

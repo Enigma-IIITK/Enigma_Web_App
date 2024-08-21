@@ -16,37 +16,42 @@ export const Bebas = Bebas_Neue({
 const Carousel: React.FC = () => {
   const [initialItems, setInitialItems] = useState<string[]>([]);
   const [headings, setHeadings] = useState<{ [key: string]: string }>({});
+  const [items, setItems] = useState<string[]>(initialItems);
+  const [centerIndex, setCenterIndex] = useState<number>(2);
 
   useEffect(() => {
     const fetchEvents = async () => {
       const eventsCollection = collection(db, 'events');
       const eventsSnapshot = await getDocs(eventsCollection);
       let eventsList = eventsSnapshot.docs.map(doc => doc.data());
-
+      
       const now = new Date();
       eventsList.filter(event => new Date(`${event.date} ${event.time}`) > now);
-       
 
+      
       const items: string[] = [];
       const headings: { [key: string]: string } = {};
 
+
       eventsList.forEach(event => {
-        if (event.imageUrl && event.title) {
-          items.push(event.imageUrl);
-          headings[event.imageUrl] = event.title;
+        if (event.imagePath && event.title) {
+          items.push(event.imagePath);
+          headings[event.imagePath] = event.title;
         }
       });
 
+      console.log(items)
+
       setInitialItems(items);
       setHeadings(headings);
+      setItems(items);
     };
 
     fetchEvents();
   }, []);
 
 
-  const [items, setItems] = useState<string[]>(initialItems);
-  const [centerIndex, setCenterIndex] = useState<number>(2);
+  
 
   const handleItemClick = (index: number) => {
     if (index !== centerIndex) {

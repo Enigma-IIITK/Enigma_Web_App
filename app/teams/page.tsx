@@ -7,6 +7,7 @@ export default function Page() {
       <>
       <NavBar2 />
       {/* <Teams /> */}
+      
       <BentoGridSecondDemo/>
       </>
     );

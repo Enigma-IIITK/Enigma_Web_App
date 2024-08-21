@@ -1,3 +1,4 @@
+"use client"
 import React, { useEffect, useState } from "react";
 import { cn } from "../utils/cn";
 import { BentoGrid, BentoGridItem } from "./ui/bento-grid1";
@@ -13,7 +14,7 @@ export default function TeamGrid({ year = "2024" }) {
 
     const roles = [
         "Club Lead", "Tech Lead", "Design Lead", "PR Lead",
-        "Research Lead", "Creative Lead", "Tech Sub Lead",
+        "Research Lead", "Creative Lead","Core Member" ,"Tech Sub Lead",
         "Design Sub Lead", "PR Sub Lead", "Research Sub Lead",
         "Creative Sub Lead"
     ];

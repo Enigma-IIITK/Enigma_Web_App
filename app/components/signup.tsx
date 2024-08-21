@@ -36,6 +36,7 @@ const Signup = () => {
     // Add user to database
     const data = { "email": email };
     const { result: result2, error: error2, data : saved_data } = await addData("users", result.user.uid, data, true);
+    console.log(result2);
     if (error2) {
       setIsErrorSignIn(true);
       return console.log(error2);
