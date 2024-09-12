@@ -18,8 +18,8 @@ const Contact = () => {
             </div>
             <div className='grid grid-cols-1 lg:grid-cols-4'>
                 <div className='p-8 col-span-2 lg:flex hidden sm:block'>
-                    <img src="/random/mascot_3.jpg" className="max-w-4xl rounded-md h-[55vh] mx-auto md:auto-rows-[20rem]" />
-                    {/* <BentoGrid className="max-w-4xl mx-auto md:auto-rows-[20rem]">
+                    {/* <img src="/random/mascot_3.jpg" className="max-w-4xl rounded-md h-[55vh] mx-auto md:auto-rows-[20rem]" /> */}
+                    <BentoGrid className="max-w-4xl mx-auto md:auto-rows-[20rem]">
                         {items.map((item, i) => (
                             <BentoGridItem
                                 key={i}
@@ -30,7 +30,7 @@ const Contact = () => {
                                 icon=""
                             />
                         ))}
-                    </BentoGrid> */}
+                    </BentoGrid>
                 </div>
                 <div className="lg:w-[400] lg:col-span-2 p-2">
                     <SignupFormDemo />
@@ -46,20 +46,20 @@ const Contact = () => {
     {
         title: "",
         description: "",
-        header: <div className="text-7xl  tracking-[.25em] py-28 px-4 bg-[url('/random/mascot_1.jpg')]"><b>EN</b></div>,
+        header: <div className="text-7xl  tracking-[.25em] py-28 px-4 "><b>EN</b></div>,
         className: "md:col-span-1",
        
       },
     {
         title: "",
         description: "",
-        header: <span className="text-7xl tracking-[.25em] py-28 px-4 bg-[url('/random/mascot_2.jpg')]"><b>IG</b></span>,
+        header: <span className="text-7xl tracking-[.25em] py-28 px-4 "><b>IG</b></span>,
         className: "md:col-span-1",
     },
     {
         title: "",
         description: "",
-        header: <span className="text-7xl tracking-[.25em] py-28 bg-[url('/random/mascot_3.jpg')]"><b>MA</b></span>,
+        header: <span className="text-7xl tracking-[.25em] py-28 "><b>MA</b></span>,
         className: "md:col-span-1",
     },
    

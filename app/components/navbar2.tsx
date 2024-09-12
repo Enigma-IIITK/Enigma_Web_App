@@ -40,7 +40,7 @@ export default function NavBar2() {
       <nav className="flex justify-between items-center w-full z-[100] rounded-lg">
         <a href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
           <img src="/logo.jpg" className="h-8" alt="Flowbite Logo" />
-          <span className="self-center text-[22px] font-semibold whitespace-nowrap dark:text-white hidden sm:block">
+          <span className="self-center text-[22px] font-semibold whitespace-nowrap text-white hidden sm:block">
             Enigma
           </span>
         </a>
