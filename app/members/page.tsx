@@ -113,10 +113,10 @@ export default function Dashboard() {
                                 aria-controls="dropdown-example"
                                 onClick={toggleSidebar}
                             >
-                                <span className="ms-3">Enigma</span><span className="ms-3">Memeber</span>
+                                <span className="ms-3">Enigma</span>
                             </button>
                         </li>
-                        <li>
+                        {/* <li>
                             <a
                                 href="#"
                                 onClick={() => setActiveTab("Dashboard")}
@@ -125,7 +125,7 @@ export default function Dashboard() {
                                 <LayoutDashboard />
                                 <span className="ms-3">Dashboard</span>
                             </a>
-                        </li>
+                        </li> */}
                         <li>
                             <a
                                 href="#"

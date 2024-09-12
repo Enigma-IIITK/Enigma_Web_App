@@ -129,14 +129,14 @@ export default function BlogEditor({author_email}) {
           placeholder="Title" 
           value={title} 
           onChange={(e) => setTitle(e.target.value)}
-          className="mb-4 px-4 py-2 border rounded w-full bg-white text-black"
+          className="mb-4 px-4 py-2 border rounded w-full bg-white border-black text-black"
         />
         <input 
           type="text" 
           placeholder="Topic" 
           value={topic} 
           onChange={(e) => setTopic(e.target.value)}
-          className="mb-4 px-4 py-2 border rounded w-1/2 bg-white text-black"
+          className="mb-4 px-4 py-2 border rounded w-1/2 border-black bg-white text-black"
         />
        
         </div>

@@ -1,6 +1,6 @@
 // db.js or firebase.js (depending on your project structure)
 import firebase_app from "../firebase/config";
-import { getFirestore, doc, setDoc, getDoc, getDocs, updateDoc, query, where,collection,addDoc } from "firebase/firestore";
+import { getFirestore, doc,orderBy ,setDoc, getDoc, getDocs, updateDoc, query, where,collection,addDoc } from "firebase/firestore";
 
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
@@ -196,6 +196,8 @@ export const addBlog = async (blog) => {
 
 
 export const getBlog = async (title) =>{
+    const result = [];
+    let error = null;
     try{
         const q = query(collection(db, "Blogs"), where("title", "==", title));
         console.log(q)
@@ -203,6 +205,7 @@ export const getBlog = async (title) =>{
         querySnapshot.forEach((doc) => {
             result.push({ id: doc.id, ...doc.data() });
         });
+        console.log(result)
     }
     catch (e) {
         console.error("Error getting documents: ", e);
@@ -216,15 +219,20 @@ export const topBlogs = async () => {
     const result = [];
     let error = null;
     try {
-      const q = query(collection(db, "Blogs"), orderBy("createdAt", "desc"), limit(4));
+      // Query Firestore for the top 10 blogs based on creation date
+      const q = query(
+        collection(db, "Blogs") // Changed limit to 10
+      );
+      
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
         result.push({ id: doc.id, ...doc.data() });
       });
-    } catch (e) {
-      console.error("Error getting top blogs: ", e);
-      error = e;
+    } catch (err) {
+      console.error("Error getting top blogs: ", err);
+      return { result, err };
     }
   
     return { result, error };
   };
+  

@@ -1,18 +1,14 @@
-"use client";
-
+"use client"
 import React, { useState, useEffect } from 'react';
 import { getBlog } from '../../firebase/addData';
+import 'react-quill/dist/quill.snow.css';
+import NavBar2 from '../../components/navbar2';
+import Footer from '../../components/footer';
 
-interface PageProps {
-  params: {
-    topic: string;
-  };
-}
-
-const Page: React.FC<PageProps> = ({ params }) => {
+const BlogPost = ({ params }) => {
   const topic = decodeURIComponent(params.topic);
-  const [content, setContent] = useState<string | null>(null);
-  const [error, setError] = useState<string | null>(null);
+  const [postData, setPostData] = useState(null);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchContent = async () => {
@@ -20,118 +16,78 @@ const Page: React.FC<PageProps> = ({ params }) => {
       if (error) {
         setError("Failed to fetch content. Please try again later.");
       } else if (result.length > 0) {
-        setContent(result[0].content);
+        setPostData(result[0]);
       } else {
-        setContent("No content available for this topic.");
+        setError("No content available for this topic.");
       }
     };
 
     fetchContent();
   }, [topic]);
 
-  return (
-    <div className="min-h-screen md:flex-col">
-      <main className="flex-grow bg-white mx-4 md:mx-8 my-8 md:my-16 rounded shadow">
-        <article>
-          <div className="mb-8">
-            <span className="top-0 left-0 bg-black text-white py-1 px-3 rounded-br-lg">Featured Post</span>
-            <img
-              src="random/background.jpg"
-              alt="Featured Post"
-              className="w-full h-auto rounded"
-            />
+  if (error) {
+    return <div className="text-center text-red-500 mt-8">{error}</div>;
+  }
+
+  if (!postData) {
+    return <div className="text-center mt-8">
+      <div className="flex justify-center items-center">
+            <div className="loader">
+              <svg viewBox="0 0 80 80">
+                <circle r="32" cy="40" cx="40" id="test"></circle>
+              </svg>
+            </div>
+
+            <div className="loader triangle">
+              <svg viewBox="0 0 86 80">
+                <polygon points="43 8 79 72 7 72"></polygon>
+              </svg>
+            </div>
+
+            <div className="loader">
+              <svg viewBox="0 0 80 80">
+                <rect height="64" width="64" y="8" x="8"></rect>
+              </svg>
+            </div>
+
           </div>
-          <h1 className="text-4xl font-bold mb-4 text-black font-serif text-center">This is a Standard Post</h1>
-          <p className="text-gray-600 mb-4 text-center">
-            Published by <a href="#" className="text-blue-500 text-center">Ben Sibley</a> on <a href="#" className="text-blue-500">November 13, 2016</a>
-          </p>
-          <div
-            className="text-gray-800 text-center p-8"
-            dangerouslySetInnerHTML={{ __html: content || "Loading content..." }}
+    </div>;
+  }
+
+  return (
+    <>
+    <NavBar2/>
+    <main className="min-h-screen pt-8 pb-16 lg:pt-16 lg:pb-24  antialiased bg-black">
+      <div className="flex justify-center px-4 mx-auto max-w-screen-xl">
+        <article className="mx-auto w-full max-w-2xl format format-sm sm:format-base lg:format-lg format-blue dark:format-invert">
+          <header className="mb-4 lg:mb-6 not-format">
+            <h1 className="text-3xl sm:text-3xl font-extrabold leading-tight text-gray-900 lg:mb-4 lg:text-5xl dark:text-white">
+              {postData.title}
+            </h1>
+
+            {/* Author and date now below the title */}
+            <address className="flex flex-col sm:flex-row items-start sm:items-center mb-6 not-italic">
+              
+              <div className="text-sm text-gray-900 dark:text-white">
+                <p className="text-sm lg:text-base text-gray-500 dark:text-gray-400">Author <span className='text-white'>{postData.author}</span></p>
+                
+                <p className="text-sm lg:text-base text-gray-500 dark:text-gray-400">Views {postData.views}</p>
+              </div>
+            </address>
+          </header>
+
+          <div 
+            className="prose max-w-none mb-6"
+            dangerouslySetInnerHTML={{ __html: postData.content }}
           />
+
+          
         </article>
-        <h1 className="text-3xl font-bold mb-4">{topic}</h1>
-        <p className="mb-6">This is a detailed post about {topic}.</p>
-        <CommentSection />
-      </main>
-      <div className="bg-pink-950 bg-opacity-80 text-white p-8 w-full">
-        <div className="text-center mb-8">
-          <img
-            src="/path-to-author-image.jpg"
-            alt="Author"
-            className="rounded-full mx-auto mb-4 w-24 h-24"
-          />
-          <h2 className="text-2xl font-bold">Author</h2>
-          <p className="text-gray-400">Optimally designed for reading</p>
-        </div>
-        <div className="mb-8">
-          <h3 className="text-xl font-semibold mb-4">Connect</h3>
-          <div className="flex justify-center space-x-4">
-            <a href="#" className="hover:text-gray-400">[Icon]</a>
-            <a href="#" className="hover:text-gray-400">[Icon]</a>
-            <a href="#" className="hover:text-gray-400">[Icon]</a>
-          </div>
-        </div>
-        <nav>
-          <ul>
-            <li className="mb-4"><a href="#" className="hover:text-gray-400">Home</a></li>
-            <li className="mb-4"><a href="#" className="hover:text-gray-400">About</a></li>
-            <li className="mb-4"><a href="#" className="hover:text-gray-400">Sample Page</a></li>
-            <li className="mb-4"><a href="#" className="hover:text-gray-400">Contact</a></li>
-          </ul>
-        </nav>
-        <div className="mt-8">
-          <h3 className="text-xl font-semibold mb-4">About Author</h3>
-          <p className="text-gray-400">
-            Author is designed for publishers who want readers. That&apos;s why Author is fast, responsive, accessibility-ready, and...
-          </p>
-        </div>
       </div>
-    </div>
+    </main>
+    <Footer/>
+    </>
   );
 };
 
-const CommentSection: React.FC = () => {
-  const [comments, setComments] = useState<{ comment: string }[]>([]);
-  const [comment, setComment] = useState('');
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setComments([...comments, { comment }]);
-    setComment('');
-  };
-
-  return (
-    <div className="mt-8">
-      <h2 className="text-2xl font-bold mb-4">Comments</h2>
-      <form onSubmit={handleSubmit} className="mb-4">
-        <div className="mb-2 text p-2">
-          <label htmlFor="comment" className="p-2 block text-sm font-medium text-gray-700">Comments</label>
-          <textarea
-            id="comment"
-            value={comment}
-            onChange={(e) => setComment(e.target.value)}
-            className="bg-white mt-1 content-normal block w-full p-1 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-black"
-            required
-          ></textarea>
-        </div>
-        <div className="p-2">
-          <button
-            type="submit"
-            className="mt-2 px-2 py-1 bg-pink-950 text-white rounded-md hover:bg-pink-800">
-            Submit
-          </button>
-        </div>
-      </form>
-      <div>
-        {comments.map((comment, index) => (
-          <div key={index} className="mb-4">
-            <p>{comment.comment}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-};
-
-export default Page;
+export default BlogPost;

@@ -9,7 +9,6 @@ const config: Config = {
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
-    
   ],
   theme: {
     extend: {
@@ -43,12 +42,11 @@ const config: Config = {
     addVariablesForColors,
   ],
   daisyui: {
-    themes: ["cupcake", "dark", "cmyk"],
+    themes: ["dark", "cupcake", "cmyk"], // Set "dark" as the first theme
   },
-  darkMode: "class",
+  darkMode: "class", // Keep this if you are using class-based toggling
 };
 export default config;
-
 
 // This plugin adds each Tailwind color as a global CSS variable, e.g. var(--gray-200).
 function addVariablesForColors({ addBase, theme }: any) {
@@ -56,7 +54,7 @@ function addVariablesForColors({ addBase, theme }: any) {
   let newVars = Object.fromEntries(
     Object.entries(allColors).map(([key, val]) => [`--${key}`, val])
   );
- 
+
   addBase({
     ":root": newVars,
   });

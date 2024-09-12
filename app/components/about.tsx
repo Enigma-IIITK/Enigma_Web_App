@@ -15,7 +15,7 @@ const About = () => {
   return (
     <>
       <section className="" id='about'>
-        <br /><br /> <br />+
+        <br /><br /> <br />
         
         <div className='w-full h-screen  grid grid-cols-2 '>
           

@@ -31,7 +31,7 @@ const Page: React.FC = () => {
      <>
       <NavBar2 />
       <EventHeader />
-      <EventFooter/>
+      {/* <EventFooter/> */}
       <div className="h-[20vh]">&nbsp;</div>
 
       <Footer />

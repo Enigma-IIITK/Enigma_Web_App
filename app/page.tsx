@@ -47,9 +47,9 @@ export default function Home() {
             The Official AI ML Club of IIIT Kottayam.
           </p>
           <div className="flex flex-col sm:flex-row items-center gap-4 mt-6">
-            <button className="px-4 py-2 bg-white/30 backdrop-blur-md hover:bg-gradient-to-r hover:from-sky-400 hover:to-blue-500 transition duration-200 rounded-full text-white shadow-[0px_2px_0px_0px_#FFFFFF40_inset] border border-white/20">
+            <a href="/signup" className="px-4 py-2 bg-white/30 backdrop-blur-md hover:bg-gradient-to-r hover:from-sky-400 hover:to-blue-500 transition duration-200 rounded-full text-white shadow-[0px_2px_0px_0px_#FFFFFF40_inset] border border-white/20">
               Join Us in our Journey
-            </button>
+            </a>
           </div>
         </Vortex>
       </div>
