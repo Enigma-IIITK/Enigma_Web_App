@@ -137,37 +137,3 @@ def make_email(news, research):
     return email_content
 
 
-
-def send_email(email_content):
-    sender_email = "spaceluvr03@gmail.com"
-    # List of recipient emails
-    receiver_emails = ["tanya22bcd10@iiitkottayam.ac.in"] # , "aditya22bcs54@iiitkottayam.ac.in"]
-    password = "zxtspibybsomcmia"
-
-    # Create the plain-text and HTML version of your message
-    text = "Hi, I've found some articles that you might find interesting"
-    html = email_content
-
-    # Create secure connection with server and send email
-    context = ssl.create_default_context()
-    with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as server:
-        server.ehlo()
-        server.login(sender_email, password)
-
-        # Send email to each recipient in the list
-        for receiver_email in receiver_emails:
-            # Create a new MIMEMultipart message for each recipient
-            message = MIMEMultipart("alternative")
-            message["Subject"] = "Your weekly dose of goodness"
-            message["From"] = sender_email
-            message["To"] = receiver_email
-
-            # Attach plain-text and HTML versions of the message
-            part1 = MIMEText(text, "plain")
-            part2 = MIMEText(html, "html")
-            message.attach(part1)
-            message.attach(part2)
-
-            # Send the email
-            server.sendmail(sender_email, receiver_email, message.as_string())
-    return True
