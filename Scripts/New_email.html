@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css"
+    />
+    <style>
+      /* Header Styling */
+      .newsletter-header {
+        background-color: #7449D6; /* Lighter blue */
+        color: white; /* White text */
+        padding: 2rem;
+        border-radius: 8px 8px 0 0;
+      }
+      /* Main content box */
+      .newsletter-content {
+        background-color: transparent; /* No background color */
+        padding: 0; /* Remove padding */
+        border: none; /* Remove border */
+        box-shadow: none; /* Remove box shadow */
+        margin: 0; /* Remove margin */
+      }
+      /* Footer Styling */
+      .newsletter-footer {
+        background-color: transparent; /* No background color */
+        padding: 1.5rem;
+        text-align: center;
+        border: none; /* Remove border */
+        box-shadow: none; /* Remove box shadow */
+        margin: 0; /* Remove margin */
+        border-radius: 0; /* Remove border radius */
+      }
+      /* Links and hover effects */
+      a {
+        color: #3273dc; /* Blue for footer links */
+        font-weight: bold;
+        text-decoration: none;
+      }
+      a:hover {
+        color: #ff3860; /* Pink on hover */
+      }
+      /* Text Styling */
+      .title, .subtitle {
+        margin-bottom: 1rem;
+      }
+      .newsletter-header h1 {
+        font-size: 2.5rem;
+      }
+      .newsletter-header p {
+        font-size: 1.2rem;
+      }
+      /* Image Styling */
+      .header-image {
+        width: 100px; /* Adjust image size */
+        height: auto;
+        margin-left: 10px; /* Adjust margin as needed */
+      }
+      /* Flexbox for header alignment */
+      .header-flex {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      /* Inline Style for HR */
+      .footer-line {
+        border: none;
+        border-top: 2px solid #ddd; /* Light grey line */
+        margin: 1.5rem 0; /* Space above and below the line */
+      }
+      /* Centered Heading with Horizontal Line */
+      .section-heading {
+        text-align: center;
+        position: relative;
+        margin: 2rem 0;
+      }
+      .section-heading h2 {
+        display: inline;
+        background-color: #fff; /* Match background color */
+        padding: 0 10px; /* Space around the text */
+        font-size: 1.8rem; /* Adjust font size */
+        font-weight: bold; /* Make font bold */
+        color: #333; /* Darker text color for better contrast */
+      }
+      .section-heading::before, .section-heading::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        width: 40%;
+        height: 1px;
+        background: #ddd;
+        z-index: -1;
+      }
+      .section-heading::before {
+        left: 0;
+      }
+      .section-heading::after {
+        right: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <section class="section">
+      <div class="columns is-centered">
+        <div class="column is-half">
+          <!-- Header -->
+          <div class="newsletter-header">
+            <div class="header-flex">
+              <div>
+                <h1 class="name">The Weekly Epoch</h1>
+                <p class="club">by Enigma</p>
+              </div>
+              <div>
+                <img
+                  src="https://i.postimg.cc/nzkZW3xv/mascots.png"
+                  alt="Header Image"
+                  class="header-image"
+                />
+              </div>
+            </div>
+          </div>
+
+          <!-- Latest Research Section -->
+          <div class="newsletter-content">
+            <div class="section-heading">
+              <h2>Latest Research</h2>
+            </div>
+            <!-- Add your latest research articles here -->
+            <p class="subtitle">
+              Content for Latest Research section.
+            </p>
+          </div>
+
+          <!-- Horizontal Line -->
+          <hr class="footer-line" />
+
+          <!-- News Section -->
+          <div class="newsletter-content">
+            <div class="section-heading">
+              <h2>News</h2>
+            </div>
+            <!-- Add your news articles here -->
+            <p class="subtitle">
+              Content for News section.
+            </p>
+          </div>
+
+          <!-- Horizontal Line -->
+          <hr class="footer-line" />
+
+          <!-- Banner Section (Centered Using Table) -->
+          <table width="100%" cellspacing="0" cellpadding="0">
+            <tr>
+              <td align="center">
+                <img
+                  src="https://i.postimg.cc/nhg97QYV/Enigma-Email-Banner-V1.png"
+                  alt="Enigma Banner"
+                  style="display: block; width: 100%; max-width: 600px; height: auto;"
+                />
+              </td>
+            </tr>
+          </table>
+
+          <!-- Footer -->
+          <div class="newsletter-footer">
+            <p>Stay connected with us!</p>
+            <a href="https://example.com/unsubscribe">Unsubscribe</a> |
+            <a href="https://enigma.iiitkottayam.ac.in/contact">Contact Us</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

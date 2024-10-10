@@ -1,0 +1,4 @@
+run the main file, it'll send the email on its own
+
+mail.py: has the functions that create the email html and send it through mail
+content.py: has functions that scrape the data from the websites
