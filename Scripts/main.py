@@ -49,8 +49,8 @@ def fetch_and_send_emails():
     for email in emails:
         mail.send_email(email, email_content)
 
-# Schedule the function to run every 5 minutes
-schedule.every(5).minutes.do(fetch_and_send_emails)
+
+schedule.every(10080).minutes.do(fetch_and_send_emails)
 
 # Keep the script running
 while True:

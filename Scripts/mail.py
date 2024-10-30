@@ -127,7 +127,7 @@ def make_email(news, research):
                     <!-- Footer -->
                     <div class="newsletter-footer center-align" style="padding: 0.5rem; text-align: center;">
                         <p>Stay connected with us!</p>
-                        <a href="https://example.com/unsubscribe" style="color: #3273dc; font-weight: bold; text-decoration: none;">Unsubscribe</a> |
+                        <a href="https://enigma.iiitkottayam.ac.in/unsubscribe" style="color: #3273dc; font-weight: bold; text-decoration: none;">Unsubscribe</a> |
                         <a href="https://enigma.iiitkottayam.ac.in/contact" style="color: #3273dc; font-weight: bold; text-decoration: none;">Contact Us</a>
                     </div>
                 </div>
@@ -147,7 +147,7 @@ def make_email(news, research):
 def send_email(email: str, content: str):
     try:
         # Define the URL
-        url = "https://script.google.com/macros/s/AKfycbx68tQhrGjYfXo4yfGhpKeph3Gca4tsFA5MfVd99t-nkvn0FVg4FQf7UEJXgtO25ygKXg/exec"
+        url = "https://script.google.com/macros/s/AKfycbxpieKjB2llWRx8TygJ2lF2ORU-LWrgmdT5-J2-7qM62Poi_kAAr9XRe0gNOhHray8J/exec"
         
         # Set up query parameters
         params = {

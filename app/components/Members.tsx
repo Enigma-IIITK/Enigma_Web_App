@@ -200,6 +200,7 @@ const MemberTable: React.FC = () => {
                                             required
                                             onChange={handleInputChange}
                                         >
+                                            <option value="Mentor">Mentor</option>
                                             <option value="Club Lead">Club Lead</option>
                                             <option value="Tech Lead">Tech Lead</option>
                                             <option value="Design Lead">Design Lead</option>
@@ -283,6 +284,7 @@ const MemberTable: React.FC = () => {
                                             value={editMember.title}
                                             onChange={handleEditInputChange}
                                         >
+                                            <option value="Mentor">Mentor</option>
                                             <option value="Club Lead">Club Lead</option>
                                             <option value="Tech Lead">Tech Lead</option>
                                             <option value="Design Lead">Design Lead</option>
