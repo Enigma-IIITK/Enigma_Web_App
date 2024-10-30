@@ -31,7 +31,7 @@ const Subscribe = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-black p-4">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-no-repeat bg-cover bg-[url('/random/subscribe.jpg')] p-4">
       <h1 className="text-white text-3xl">The Weekly Epoch</h1>
       <br />
       <h1 className="text-white text-2xl mb-4">Subscribe to our Newsletter</h1>

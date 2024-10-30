@@ -29,6 +29,7 @@
     "gsap": "^3.12.5",
     "lucide-react": "^0.379.0",
     "next": "^14.2.5",
+    "node-cron": "^3.0.3",
     "quill": "^2.0.2",
     "react": "^18.3.1",
     "react-codemirror2": "^8.0.0",

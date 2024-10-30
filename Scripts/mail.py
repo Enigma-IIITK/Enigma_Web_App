@@ -4,6 +4,7 @@ import os
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from bs4 import BeautifulSoup
+import requests
 
 
 def create_article_html(article, content_template):
@@ -97,15 +98,21 @@ def make_email(news, research):
 
                     <!-- Latest Research Section -->
                     <div class="newsletter-content center-align">
-                        <h2>Latest Research</h2>
+                        <div class="section-heading">
+                            <h2>Latest Research</h2>
+                        </div>
                         {research_content}
                     </div>
 
                     <!-- Latest News Section -->
                     <div class="newsletter-content center-align">
-                        <h2>News</h2>
+                        <div class="section-heading">
+                            <h2>News</h2>
+                        </div>
                         {news_content}
                     </div>
+                    <!-- Horizontal Line -->
+                    <hr class="footer-line" />
 
                     <!-- Banner Section -->
                     <div class="banner-section" style="text-align: center;">
@@ -136,4 +143,39 @@ def make_email(news, research):
 
     return email_content
 
+
+def send_email(email: str, content: str):
+    try:
+        # Define the URL
+        url = "https://script.google.com/macros/s/AKfycbx68tQhrGjYfXo4yfGhpKeph3Gca4tsFA5MfVd99t-nkvn0FVg4FQf7UEJXgtO25ygKXg/exec"
+        
+        # Set up query parameters
+        params = {
+            'email': email
+        }
+
+        # Prepare headers and body
+        headers = {
+            'Content-Type': 'application/json'
+        }
+        data = {
+            'content': content
+        }
+
+        # Send the POST request
+        response = requests.post(url, headers=headers, params=params, json=data)
+
+        # Parse and return response
+        if response.status_code == 200:
+            result = response.json()
+            print("Email sent successfully:", result)
+            return {"message": "Email sent successfully", "result": result}
+        else:
+            print("Failed to send email:", response.text)
+            return {"error": "Failed to send email", "status_code": response.status_code}
+
+    except Exception as error:
+        # Handle any exceptions
+        print("Error sending email:", error)
+        return {"error": "An error occurred while sending email"}
 

@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { db } from '../firebase/addData'; 
 import { collection, query, where, getDocs, deleteDoc, doc } from 'firebase/firestore';
 import { SparklesCore } from "../components/ui/sparkles"; 
+import Footer from '../components/footer';
 
 const Unsubscribe = () => {
   const [email, setEmail] = useState('');
@@ -41,18 +42,10 @@ const Unsubscribe = () => {
   };
 
   return (
-    <div className="h-[40rem] relative w-full bg-black flex flex-col items-center justify-center overflow-hidden rounded-md">
-      <div className="w-full absolute inset-0 h-screen">
-        <SparklesCore
-          id="tsparticlesfullpage"
-          background="transparent"
-          minSize={0.6}
-          maxSize={1.4}
-          particleDensity={100}
-          className="w-full h-full"
-          particleColor="#FFFFFF"
-        />
-      </div>
+    <>
+    <div className="h-[40rem] relative w-full bg-cover bg-[url('/random/unsubscribe.jpg')] flex flex-col items-center justify-center overflow-hidden rounded-md">
+       <h1 className="text-white text-3xl">The Weekly Epoch</h1>
+       <br />
       <h1 className="text-white text-2xl mb-4">Unsubscribe from our Newsletter</h1>
       <form onSubmit={handleUnsubscribe} className="flex flex-col items-center">
         <input
@@ -74,7 +67,10 @@ const Unsubscribe = () => {
         </button>
       </form>
       {message && <p className="mt-4 text-white">{message}</p>}
+      
     </div>
+    <Footer/>
+    </>
   );
 };
 

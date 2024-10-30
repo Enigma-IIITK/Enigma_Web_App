@@ -11,6 +11,7 @@ import EventHead from '../components/EditEvents';
 import BlogTable from '../components/BlogList';
 import UserTable from '../components/UsersList';
 import Certificates from '../components/Certificates';
+
 import { getData } from '../firebase/addData';
 
 export default function Dashboard() {
@@ -179,6 +180,16 @@ export default function Dashboard() {
                         <li>
                             <a
                                 href="#"
+                                onClick={() => setActiveTab("Newsletter")}
+                                className={`flex items-center p-2 rounded-lg hover:bg-gray-800 group ${activeTab === "Newsletter" ? "bg-gray-900" : "text-gray-900"}`}
+                            >
+                                <Dices />
+                                <span className="ms-3">Schedule Newsletter</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a
+                                href="#"
                                 onClick={() => setActiveTab("Certificates")}
                                 className={`flex items-center p-2 rounded-lg hover:bg-gray-800 group ${activeTab === "Certificates" ? "bg-gray-900" : "text-gray-900"}`}
                             >
@@ -268,6 +279,8 @@ export default function Dashboard() {
                 {activeTab == "Users" ? <UserTable /> : null}
 
                 {activeTab == "Certificates" ? <Certificates /> : null}
+
+                
             </div>
         </div>
     );

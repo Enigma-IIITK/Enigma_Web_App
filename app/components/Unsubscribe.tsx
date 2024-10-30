@@ -39,7 +39,7 @@ const Unsubscribe = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900 p-4">
+    <div className="flex flex-col items-center justify-center min-h-screen  p-4">
         <h1 className="text-white text-3xl">The Weekly Epoch</h1><br />
       <h1 className="text-white text-2xl mb-4">Unsubscribe from our Newsletter</h1>
       <form onSubmit={handleUnsubscribe} className="flex flex-col items-center">

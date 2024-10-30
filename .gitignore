@@ -38,3 +38,5 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 .env
+
+web-enigma-firebase-adminsdk-0p2qg-7c56207092.json

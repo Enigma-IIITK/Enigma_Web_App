@@ -1,0 +1,6 @@
+beautifulsoup4~=4.12.2
+requests~=2.31.0
+email-validator==2.0.0
+html5lib
+firebase-admin
+schedule
