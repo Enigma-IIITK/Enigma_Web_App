@@ -147,7 +147,7 @@ def make_email(news, research):
 def send_email(email: str, content: str):
     try:
         # Define the URL
-        url = "https://script.google.com/macros/s/AKfycbxpieKjB2llWRx8TygJ2lF2ORU-LWrgmdT5-J2-7qM62Poi_kAAr9XRe0gNOhHray8J/exec"
+        url = "https://script.google.com/macros/s/AKfycbxSDtdv6ycH2EU1lowv1Sum3gTbTpzRRBBGfLefA_XmzGIlWSQ1dYDocL6huVFtWtMl/exec"
         
         # Set up query parameters
         params = {
