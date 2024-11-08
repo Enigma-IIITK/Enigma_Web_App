@@ -123,9 +123,14 @@ def nature(soup):
 
 
 def deepmind(soup):
+    # Initialize variables
+    article_title = None
+    article_description = None
+    article_link = None
+
     # Find the section with the "Latest news" heading
     latest_news_section = soup.find('h2', string="Latest news").find_parent('div', class_='section-heading')
-
+ 
     if latest_news_section:
         # Locate the first article with the "research" tag
         first_research_article = latest_news_section.find_next('li', {'data-gdm-filter-category': 'research'})
@@ -135,17 +140,23 @@ def deepmind(soup):
             article_title = first_research_article.find('p', class_='glue-headline glue-headline--headline-5')
             article_description = first_research_article.find('p', class_='glue-card__description').get_text(strip=True)
             article_link = first_research_article.find('a', class_='glue-card')['href']
-
         else:
             print("No research articles found under the Latest news section.")
     else:
         print("Latest news section not found.")
 
-    article_data = {
-        'article_url': 'https://deepmind.google' + article_link,
-        'article_title': article_title.get_text(strip=True),
-        'content': article_description
-    }
+    if article_title and article_description and article_link:
+        article_data = {
+            'article_url': 'https://deepmind.google' + article_link,
+            'article_title': article_title.get_text(strip=True),
+            'content': article_description
+        }
+    else:
+        article_data = {
+            'article_url': '',
+            'article_title': 'No article found',
+            'content': ''
+        }
 
     return article_data
 
