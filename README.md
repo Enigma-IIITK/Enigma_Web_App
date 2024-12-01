@@ -1,43 +1,152 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Enigma WebApp 🌟  
 
-## Getting Started
+[Visit the WebApp](https://enigma.iiitkottayam.ac.in/)  
 
-First install required dependencies
+Enigma WebApp is the official portfolio and interactive platform for the **AI/ML Club** at IIIT Kottayam. The application highlights the club's vision, team, events, and patrons while providing a seamless interface for admins, members, and users to interact with dynamic content.  
 
-```bash
-npm install
+---  
 
-```
+## 🚀 Features  
 
-Then ,run the development server:
+### General Pages  
+- **Home**: Overview of the club's activities and mission.  
+- **Team**: Meet the brilliant minds behind the club.  
+- **Patrons**: Showcase of the club's supporters and contributors.  
+- **Events**: A section dedicated to past and upcoming events.  
+- **Contact**: Reach out to us with ease.  
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### Dashboards  
+- **Admin Dashboard**:  
+  - Add and manage members.  
+  - Organize and track events.  
+  - Issue certificates to participants.  
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Member Dashboard**:  
+  - Edit profile and details.  
+  - Manage events and schedules.  
+  - Contribute blogs to the webapp.  
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **User Dashboard**:  
+  - Personal profile management.  
+  - Manage and publish personal blogs.  
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### Additional Features  
+- **Certificate Verifier**: Verify event certificates using unique IDs.  
+- **Newsletter System**: Subscribe to AI/ML research updates and findings.  
+- **Dynamic Blog System**: Members and users can add blogs by topic.  
 
-## Learn More
+---  
 
-To learn more about Next.js, take a look at the following resources:
+## 🛠️ Technology Stack  
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### WebApp  
+- **Framework**: Built with **Next.JS**.  
+- **Styling**: Responsive design powered by **CSS**.  
+- **Storage**: Cloud storage integrated with **Firebase**.  
+- **Hosting**: Deployed on the local hosting solution provided by IIIT Kottayam.  
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### Scripts Module  
+Located in the `Scripts/` folder, this **Python-based project**:  
+- Scrapes the web for AI/ML research and new findings.  
+- Automates the creation of newsletters for club members.  
+- Detailed documentation for this module is provided in its [README](Scripts/README.md).  
 
-## Deploy on Vercel
+---  
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 📂 Folder Structure  
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+```plaintext  
+├───app  
+│   ├───blog                  # Blog system  
+│   ├───certificate_verifier  # Certificate verification by ID  
+│   ├───components/ui         # Reusable UI components  
+│   ├───contact               # Contact page logic  
+│   ├───dashboard             # Admin dashboard  
+│   ├───data                  # Data-related utilities  
+│   ├───editor                # Rich-text editor components  
+│   ├───events                # Events management logic  
+│   ├───firebase              # Firebase configurations  
+│   ├───home                  # Home page  
+│   ├───login                 # Login functionality  
+│   ├───members               # Member-specific components  
+│   ├───newsletter            # Newsletter subscription system  
+│   ├───people                # Additional content for team or patrons  
+│   ├───rspv                  # RSVP functionality for events  
+│   ├───signup                # Signup logic  
+│   ├───subscribe             # Subscription flow  
+│   ├───teams                 # Teams showcase  
+│   ├───unsubscribe           # Unsubscribe functionality  
+│   ├───users                 # User components  
+│   ├───user_dashboard        # User dashboard logic  
+│   └───utils                 # General utilities  
+├───public  
+│   ├───events                # Event assets  
+│   ├───img                   # Images for the site  
+│   ├───patrons               # Patron images and resources  
+│   └───random                # Miscellaneous public assets  
+└───Scripts  
+    └───__pycache__           # Python script cache  
+```  
+
+---  
+
+## 🔧 Usage  
+
+### Development  
+1. Clone the repository.  
+2. Install dependencies:  
+   ```bash  
+   npm install  
+   ```  
+3. Start the development server:  
+   ```bash  
+   npm run dev  
+   ```  
+
+### Production  
+1. Build the optimized application:  
+   ```bash  
+   npm run build  
+   ```  
+2. Start the server:  
+   ```bash  
+   npm start  
+   ```  
+   By default, the app runs on **port 8080**.  
+
+---  
+
+## 🌐 URL  
+
+Access the webapp at: [https://enigma.iiitkottayam.ac.in/](https://enigma.iiitkottayam.ac.in/)  
+
+---  
+
+## ❤️ Contributions  
+
+We welcome contributions from club members and the wider community. Follow these steps:  
+
+1. Fork the repository.  
+2. Create a branch:  
+   ```bash  
+   git checkout -b feature-name  
+   ```  
+3. Commit your changes:  
+   ```bash  
+   git commit -m "Add your message here"  
+   ```  
+4. Push to the branch:  
+   ```bash  
+   git push origin feature-name  
+   ```  
+5. Open a Pull Request.  
+
+---  
+
+## 🔗 License  
+
+This project is licensed under the [MIT License](LICENSE).  
+
+---  
+
+Enjoy exploring **Enigma WebApp**! 🚀
