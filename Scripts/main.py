@@ -47,7 +47,7 @@ def fetch_and_send_emails():
     # if email_content:
     #     print("generated content")
 
-    
+    #mail.send_email("ashiqfiroz08@gmail.com", email_content)
     # Fetch subscribers and send emails
     emails = DataFetch.fetch_subscribers()
     try:
