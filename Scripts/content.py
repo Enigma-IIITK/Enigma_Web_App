@@ -31,7 +31,7 @@ def techcrunch(soup):
                 article_data = {
                     'article_url': link,
                     'article_title': title,
-                    'content': description_text
+                    'content':"" #description_text
                 }
 
                 return article_data

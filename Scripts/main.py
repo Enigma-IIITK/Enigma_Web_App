@@ -47,20 +47,20 @@ def fetch_and_send_emails():
     # if email_content:
     #     print("generated content")
 
-    
-    # Fetch subscribers and send emails
-    emails = DataFetch.fetch_subscribers()
-    try:
-        for email in emails:
-            #print("Sending mail to ",email)
-            mail.send_email(email, email_content)
-    except Exception as err:
-        print(err)
+    mail.send_email("ashiqfiroz08@gmail.com", email_content)
+    # # Fetch subscribers and send emails
+    # emails = DataFetch.fetch_subscribers()
+    # try:
+    #     for email in emails:
+    #         #print("Sending mail to ",email)
+    #         mail.send_email(email, email_content)
+    # except Exception as err:
+    #     print(err)
 
 fetch_and_send_emails()
-schedule.every().week.do(fetch_and_send_emails)
+# schedule.every().week.do(fetch_and_send_emails)
 
-# Keep the script running
-while True:
-    schedule.run_pending()
-    time.sleep(1)
+# # Keep the script running
+# while True:
+#     schedule.run_pending()
+#     time.sleep(1)

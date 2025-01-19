@@ -11,6 +11,7 @@ import EventHead from '../components/EditEvents';
 import BlogTable from '../components/BlogList';
 import UserTable from '../components/UsersList';
 import Certificates from '../components/Certificates';
+import NewsEditor from '../components/Enigma_Newsletter/enigma_news'; 
 
 import { getData } from '../firebase/addData';
 
@@ -280,7 +281,7 @@ export default function Dashboard() {
 
                 {activeTab == "Certificates" ? <Certificates /> : null}
 
-                
+                {activeTab == "Newsletter" ? <NewsEditor /> : null}
             </div>
         </div>
     );
