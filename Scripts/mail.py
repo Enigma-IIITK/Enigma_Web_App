@@ -72,163 +72,166 @@ def make_email(news, research):
 
     # Format the final email content
     email_content = f"""
-  <!DOCTYPE html>
-<html>
-  <head>
+    <!DOCTYPE html>
+  <html>
+    <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css" />
     <style>
       {css}
     </style>
-  </head>
-  <body>
+    </head>
+    <body>
     <section class="section">
       <div class="column is-half center-align">
-        <!-- Header -->
-        <div class="newsletter-header" style="background-color: #7449D6; color: white; padding: 1.5rem; border-radius: 8px; margin-bottom: 1rem;">
-          <table width="100%" cellpadding="0" cellspacing="0" border="0">
-            <tr>
-              <td align="left" style="padding: 0; margin: 0; vertical-align: middle;">
-                <h1 style="font-size: 2rem; margin: 0;">The Weekly Epoch</h1>
-                <p style="font-size: 1rem; margin: 0; margin-top: 5px;">by Enigma ♡</p>
-              </td>
-              <td align="right" style="padding: 0; margin: 0; text-align: right; vertical-align: middle;">
-                <img
-                  src="https://i.postimg.cc/nzkZW3xv/mascots.png"
-                  alt="Header Image"
-                  style="max-width: 100px; height: auto; display: block; margin: 0 auto;"
-                />
-              </td>
-            </tr>
-          </table>
-        </div>
-
-        <!-- Latest Research Section -->
-        <div class="newsletter-content center-align">
-          <table width="100%" cellspacing="0" cellpadding="0" border="0" style="border-collapse: collapse;">
-            <tr>
-              <td style="padding: 0.5rem; text-align: center;">
-                <table align="center" cellspacing="0" cellpadding="0" border="0" style="border-collapse: collapse; width: 100%;">
-                  <tr>
-                    <td style="width: 100%; text-align: center; vertical-align: middle;">
-                      <table align="center" cellspacing="0" cellpadding="0" border="0" style="border-collapse: collapse; display: inline-block; width: auto;">
-                        <tr>
-                          <td style="border-top: 1px solid #000; width: 100%; height: 0;"></td>
-                        </tr>
-                        <tr>
-                          <td style="padding: 0.5rem 1rem; text-align: center;">
-                            <h2 style="margin: 0; padding: 0; font-size: 20px; line-height: 1.2;">Latest Research</h2>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td style="border-bottom: 1px solid #000; width: 100%; height: 0;"></td>
-                        </tr>
-                      </table>
-                    </td>
-                  </tr>
-                </table>
-              </td>
-            </tr>
-            <tr>
-              <td style="text-align: center;">
-                {research_content}
-              </td>
-            </tr>
-          </table>
-        </div>
-
-        <!-- Latest News Section -->
-        <div class="newsletter-content center-align">
-          <table width="100%" cellspacing="0" cellpadding="0" border="0" style="border-collapse: collapse;">
-            <tr>
-              <td style="padding: 0.5rem; text-align: center;">
-                <table align="center" cellspacing="0" cellpadding="0" border="0" style="border-collapse: collapse; width: 100%;">
-                  <tr>
-                    <td style="width: 100%; text-align: center; vertical-align: middle;">
-                      <table align="center" cellspacing="0" cellpadding="0" border="0" style="border-collapse: collapse; display: inline-block; width: auto;">
-                        <tr>
-                          <td style="border-top: 1px solid #000; width: 100%; height: 0;"></td>
-                        </tr>
-                        <tr>
-                          <td style="padding: 0.5rem 1rem; text-align: center;">
-                            <h2 style="margin: 0; padding: 0; font-size: 20px; line-height: 1.2;">News</h2>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td style="border-bottom: 1px solid #000; width: 100%; height: 0;"></td>
-                        </tr>
-                      </table>
-                    </td>
-                  </tr>
-                </table>
-              </td>
-            </tr>
-            <tr>
-              <td style="text-align: center;">
-                {news_content}
-              </td>
-            </tr>
-          </table>
-        </div>
-
-        <!-- Enigma News Section -->
-        <div class="newsletter-content center-align">
-          <table width="100%" cellspacing="0" cellpadding="0" border="0" style="border-collapse: collapse;">
-            <tr>
-              <td style="padding: 0.5rem; text-align: center;">
-                <table align="center" cellspacing="0" cellpadding="0" border="0" style="border-collapse: collapse; width: 100%;">
-                  <tr>
-                    <td style="width: 100%; text-align: center; vertical-align: middle;">
-                      <table align="center" cellspacing="0" cellpadding="0" border="0" style="border-collapse: collapse; display: inline-block; width: auto;">
-                        <tr>
-                          <td style="border-top: 1px solid #000; width: 100%; height: 0;"></td>
-                        </tr>
-                        <tr>
-                          <td style="padding: 0.5rem 1rem; text-align: center;">
-                            <h2 style="margin: 0; padding: 0; font-size: 20px; line-height: 1.2;">Whats New At Enigma</h2>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td style="border-bottom: 1px solid #000; width: 100%; height: 0;"></td>
-                        </tr>
-                      </table>
-                    </td>
-                  </tr>
-                </table>
-              </td>
-            </tr>
-            <tr>
-              <td style="text-align: center;">
-                {enigma_news_content['news']['body']}
-              </td>
-            </tr>
-          </table>
-        </div>
-
-        <!-- Horizontal Line -->
-        <hr class="footer-line" />
-
-        <!-- Banner Section -->
-        <div class="banner-section" style="text-align: center;">
+      <!-- Header -->
+      <div class="newsletter-header" style="background-color: #7449D6; color: white; padding: 1.5rem; border-radius: 8px; margin-bottom: 1rem;">
+        <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td align="left" style="padding: 0; margin: 0; vertical-align: middle;">
+          <h1 style="font-size: 2rem; margin: 0;">The Weekly Epoch</h1>
+          <p style="font-size: 1rem; margin: 0; margin-top: 5px;">by Enigma ♡</p>
+          </td>
+          <td align="right" style="padding: 0; margin: 0; text-align: right; vertical-align: middle;">
           <img
-            src="https://i.postimg.cc/nhg97QYV/Enigma-Email-Banner-V1.png"
-            alt="Enigma Banner"
-            class="banner-image"
-            style="display: block; margin: 0 auto; max-width: 100%;"
+            src="https://i.postimg.cc/nzkZW3xv/mascots.png"
+            alt="Header Image"
+            style="max-width: 100px; height: auto; display: block; margin: 0 auto;"
           />
-        </div>
+          </td>
+        </tr>
+        </table>
+      </div>
 
-        <!-- Footer -->
-        <div class="newsletter-footer center-align" style="padding: 0.5rem; text-align: center;">
-          <p>Stay connected with us!</p>
-          <a href="https://enigma.iiitkottayam.ac.in/unsubscribe" style="color: #3273dc; font-weight: bold; text-decoration: none;">Unsubscribe</a> |
-          <a href="https://enigma.iiitkottayam.ac.in/contact" style="color: #3273dc; font-weight: bold; text-decoration: none;">Contact Us</a>
-        </div>
+       <!-- Enigma News Section -->
+      <div class="newsletter-content center-align">
+        <table width="100%" cellspacing="0" cellpadding="0" border="0" style="border-collapse: collapse;">
+        <tr>
+          <td style="padding: 0.5rem; text-align: center;">
+          <table align="center" cellspacing="0" cellpadding="0" border="0" style="border-collapse: collapse; width: 100%;">
+            <tr>
+            <td style="width: 100%; text-align: center; vertical-align: middle;">
+              <table align="center" cellspacing="0" cellpadding="0" border="0" style="border-collapse: collapse; display: inline-block; width: auto;">
+              <tr>
+                <td style="border-top: 1px solid #000; width: 100%; height: 0;"></td>
+              </tr>
+              <tr>
+                <td style="padding: 0.5rem 1rem; text-align: center;">
+                <h2 style="margin: 0; padding: 0; font-size: 20px; line-height: 1.2;">Whats New At Enigma</h2>
+                </td>
+              </tr>
+              <tr>
+                <td style="border-bottom: 1px solid #000; width: 100%; height: 0;"></td>
+              </tr>
+              </table>
+            </td>
+            </tr>
+          </table>
+          </td>
+        </tr>
+        <tr>
+          <td style="text-align: center;">
+          {enigma_news_content['news']['body']}
+          </td>
+        </tr>
+        </table>
+      </div>
+
+      <!-- Latest Research Section -->
+      <div class="newsletter-content center-align">
+        <table width="100%" cellspacing="0" cellpadding="0" border="0" style="border-collapse: collapse;">
+        <tr>
+          <td style="padding: 0.5rem; text-align: center;">
+          <table align="center" cellspacing="0" cellpadding="0" border="0" style="border-collapse: collapse; width: 100%;">
+            <tr>
+            <td style="width: 100%; text-align: center; vertical-align: middle;">
+              <table align="center" cellspacing="0" cellpadding="0" border="0" style="border-collapse: collapse; display: inline-block; width: auto;">
+              <tr>
+                <td style="border-top: 1px solid #000; width: 100%; height: 0;"></td>
+              </tr>
+              <tr>
+                <td style="padding: 0.5rem 1rem; text-align: center;">
+                <h2 style="margin: 0; padding: 0; font-size: 20px; line-height: 1.2;">Latest Research</h2>
+                </td>
+              </tr>
+              <tr>
+                <td style="border-bottom: 1px solid #000; width: 100%; height: 0;"></td>
+              </tr>
+              </table>
+            </td>
+            </tr>
+          </table>
+          </td>
+        </tr>
+        <tr>
+          <td style="text-align: center;">
+          {research_content}
+          </td>
+        </tr>
+        </table>
+      </div>
+
+      <!-- Latest News Section -->
+      <div class="newsletter-content center-align">
+        <table width="100%" cellspacing="0" cellpadding="0" border="0" style="border-collapse: collapse;">
+        <tr>
+          <td style="padding: 0.5rem; text-align: center;">
+          <table align="center" cellspacing="0" cellpadding="0" border="0" style="border-collapse: collapse; width: 100%;">
+            <tr>
+            <td style="width: 100%; text-align: center; vertical-align: middle;">
+              <table align="center" cellspacing="0" cellpadding="0" border="0" style="border-collapse: collapse; display: inline-block; width: auto;">
+              <tr>
+                <td style="border-top: 1px solid #000; width: 100%; height: 0;"></td>
+              </tr>
+              <tr>
+                <td style="padding: 0.5rem 1rem; text-align: center;">
+                <h2 style="margin: 0; padding: 0; font-size: 20px; line-height: 1.2;">News</h2>
+                </td>
+              </tr>
+              <tr>
+                <td style="border-bottom: 1px solid #000; width: 100%; height: 0;"></td>
+              </tr>
+              </table>
+            </td>
+            </tr>
+          </table>
+          </td>
+        </tr>
+        <tr>
+          <td style="text-align: center;">
+          {news_content}
+          </td>
+        </tr>
+        </table>
+      </div>
+
+       
+
+      <!-- Horizontal Line -->
+      <hr class="footer-line" />
+
+      <!-- Banner Section -->
+      <div class="banner-section" style="text-align: center;">
+        <img
+        src="https://i.postimg.cc/nhg97QYV/Enigma-Email-Banner-V1.png"
+        alt="Enigma Banner"
+        class="banner-image"
+        style="display: block; margin: 0 auto; max-width: 100%;"
+        />
+      </div>
+
+      <!-- Footer -->
+      <div class="newsletter-footer center-align" style="padding: 0.5rem; text-align: center;">
+        <p>Stay connected with us!</p>
+        <a href="https://enigma.iiitkottayam.ac.in/unsubscribe" style="color: #3273dc; font-weight: bold; text-decoration: none;">Unsubscribe</a> |
+        <a href="https://enigma.iiitkottayam.ac.in/contact" style="color: #3273dc; font-weight: bold; text-decoration: none;">Contact Us</a> |
+        <a href="https://enigma.iiitkottayam.ac.in/subscribe" style="color: #3273dc; font-weight: bold; text-decoration: none;">Subscribe Now</a>
+      </div>
       </div>
     </section>
-  </body>
-</html>
+    </body>
+  </html>
 
     """
 
