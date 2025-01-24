@@ -8,7 +8,7 @@ import content
 import DataFetch
 
 # Define the main function to fetch, generate, and send email content
-def fetch_and_send_emails(launch=False):
+def fetch_and_send_emails():
     #print("Scraping started...")
     # Helper function to create soup object
     def get_soup(url):
@@ -49,19 +49,17 @@ def fetch_and_send_emails(launch=False):
 
     #mail.send_email("ashiqfiroz08@gmail.com", email_content)
 
-    if launch == True:
-        mail.send_email("talks@iiitkottayam.ac.in", email_content)
-    else:
-        # Fetch subscribers and send emails
-        emails = DataFetch.fetch_subscribers()
-        try:
-            for email in emails:
-                #print("Sending mail to ",email)
-                mail.send_email(email, email_content)
-        except Exception as err:
-            print(err)
+   
+    # Fetch subscribers and send emails
+    emails = DataFetch.fetch_subscribers()
+    try:
+        for email in emails:
+            #print("Sending mail to ",email)
+            mail.send_email(email, email_content)
+    except Exception as err:
+        print(err)
 
-fetch_and_send_emails(launch=True)
+fetch_and_send_emails()
 schedule.every().week.do(fetch_and_send_emails)
 
 # Keep the script running
