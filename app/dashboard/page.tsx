@@ -12,6 +12,7 @@ import BlogTable from '../components/BlogList';
 import UserTable from '../components/UsersList';
 import Certificates from '../components/Certificates';
 import NewsEditor from '../components/Enigma_Newsletter/enigma_news'; 
+import SubscriberList from '../components/Enigma_Newsletter/manage_subs';
 
 import { getData } from '../firebase/addData';
 
@@ -191,6 +192,16 @@ export default function Dashboard() {
                         <li>
                             <a
                                 href="#"
+                                onClick={() => setActiveTab("Newsletter-subs")}
+                                className={`flex items-center p-2 rounded-lg hover:bg-gray-800 group ${activeTab === "Newsletter-subs" ? "bg-gray-900" : "text-gray-900"}`}
+                            >
+                                <Dices />
+                                <span className="ms-3">Newsletter Subscribers</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a
+                                href="#"
                                 onClick={() => setActiveTab("Certificates")}
                                 className={`flex items-center p-2 rounded-lg hover:bg-gray-800 group ${activeTab === "Certificates" ? "bg-gray-900" : "text-gray-900"}`}
                             >
@@ -282,6 +293,7 @@ export default function Dashboard() {
                 {activeTab == "Certificates" ? <Certificates /> : null}
 
                 {activeTab == "Newsletter" ? <NewsEditor /> : null}
+                {activeTab == "Newsletter-subs"? <SubscriberList/> : null}
             </div>
         </div>
     );
