@@ -1,16 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Groq from "groq-sdk";
-import {
-  Heart,
-  ArrowRight,
-  ArrowLeft,
-  Share2,
-  Loader2,
-  Flame,
-  X,
-} from "lucide-react";
+import { Heart, ArrowRight, ArrowLeft, Share2, Loader2, Flame, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const questions = [
@@ -67,94 +58,30 @@ const predefinedAnswers = {
   ],
 };
 
-const groq = new Groq({
-  apiKey: process.env.NEXT_PUBLIC_GROQ_API_KEY,
-  dangerouslyAllowBrowser: true,
-});
-
-async function askGroq(
-  gender: string,
-  answers: any[],
-  mode: "normal" | "roast"
-) {
+async function askGroq(gender: string, answers: any[], mode: "normal" | "roast") {
   try {
-    const completion = await groq.chat.completions.create({
-      messages: [
-        {
-          role: "user",
-          content: `You are an AI love guru with ${
-            mode === "roast" ? "savage roasting abilities" : "gentle wisdom"
-          }. 
-            Analyze these 8 responses about their crush (who is a ${gender}) and ${
-            mode === "roast"
-              ? "absolutely destroy their confidence with clever, hilarious insults"
-              : "provide kind but realistic guidance"
-          }.
-        
-            Their responses:
-            ${answers.map((a) => `Q: ${a.question}\nA: ${a.answer}\n`).join("")}
-        
-            Respond with a JSON object containing these sections only, do not add any extra text:
-            {
-              "intro": ${
-                mode === "roast"
-                  ? "a brutal opening that roasts their situation"
-                  : "a warm, encouraging opening about their situation"
-              },
-              "analysis": ${
-                mode === "roast"
-                  ? "savage commentary about their answers, pointing out embarrassing details"
-                  : "thoughtful analysis of their chances based on their answers"
-              },
-              "verdict": ${
-                mode === "roast"
-                  ? "a hilarious final roast with a 0-100% chance of romantic success"
-                  : "a supportive final prediction with a 0-100% chance of success"
-              },
-              "percentage": "a number between 0 and 100 representing their chances",
-              "message": "based on the percentage, select the appropriate message:
-                0-20%: 'Brrr… looks like your chances are frozen solid! Maybe warm things up with some friendly chats first?'
-                21-40%: 'You're waddling on thin ice! Try dropping some hints and see if they slide your way!'
-                41-60%: 'Not quite love at first peck, but you've got a flippin' good chance! Go for it!'
-                61-80%: 'Ooooh, this is heating up! Just a little more confidence, and you'll be the coolest Valentine in town!'
-                81-100%: 'Full speed ahead! Your crush is practically penguin-huddling with you already—time to make your move!'"
-            }
-
-        
-            ${
-              mode === "roast"
-                ? "Make it devastatingly funny but avoid truly harmful insults. Think professional roast comedian. Have more than 100 words"
-                : "Be encouraging while staying grounded in reality. Think supportive friend. Have more than 100 words"
-            }`,
-        },
-      ],
-      model: "llama3-70b-8192",
-      response_format: { type: "json_object" },
+    const response = await fetch('/api/predict', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ gender, answers, mode })
     });
 
-    const response = completion.choices[0]?.message?.content || "";
-    try {
-      const parsedResponse = JSON.parse(response);
-      return {
-        intro: parsedResponse.intro || "Loading your love forecast...",
-        analysis:
-          parsedResponse.analysis || "Analyzing your romantic potential...",
-        verdict: parsedResponse.verdict || "Calculating final prediction...",
-        percentage: parsedResponse.percentage || 0,
-        message: parsedResponse.message || "Calculating your chances...",
-      };
-    } catch (error) {
-      console.error("Error parsing Groq response:", error);
-      return {
-        intro: "Error processing your love forecast...",
-        analysis: "Unable to analyze your responses...",
-        verdict: "Cannot calculate prediction at this time...",
-        percentage: 0,
-        message: "Unable to calculate your chances at this time...",
-      };
+    if (!response.ok) {
+      throw new Error('Failed to get prediction');
     }
+
+    const data = await response.json();
+    return {
+      intro: data.intro || "Loading your love forecast...",
+      analysis: data.analysis || "Analyzing your romantic potential...",
+      verdict: data.verdict || "Calculating final prediction...",
+      percentage: data.percentage || 0,
+      message: data.message || "Calculating your chances..."
+    };
   } catch (error) {
-    console.error("Error calling Groq:", error);
+    console.error("Error:", error);
     throw new Error("Failed to get prediction");
   }
 }
@@ -391,13 +318,16 @@ export default function Home() {
                 <select
                   value={gender}
                   onChange={(e) => setGender(e.target.value)}
-                  className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500"
+                  className="w-full p-2 bg-white text-black border rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500"
                 >
                   <option value="">Select gender</option>
                   <option value="male">Male</option>
                   <option value="female">Female</option>
                   <option value="non-binary">
-                    IDK dude, can't be sure these days
+                  penguin
+                  </option>
+                  <option value="non-binary">
+                  who are you the cops?
                   </option>
                 </select>
               </div>
@@ -574,16 +504,16 @@ export default function Home() {
 
               <button
                 onClick={() => {
-                  //TODO @Ashiq | @Vishnu: Share results
+                  window.location.reload()
                 }}
                 className={`mt-8 flex items-center justify-center w-full py-3 ${
                   mode === "normal"
                     ? "bg-pink-500 hover:bg-pink-600"
                     : "bg-red-600 hover:bg-red-700"
-                } text-white rounded-xl transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200`}
+                } text-white rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200`}
               >
-                <Share2 className="w-4 h-4 mr-2" />
-                Share Your Results
+                
+                Start Over
               </button>
             </div>
           </motion.div>
