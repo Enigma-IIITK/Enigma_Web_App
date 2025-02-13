@@ -13,6 +13,11 @@ const questions = [
   "Why do you want them to be your Valentine? (e.g., just a crush, really like them, want to know them better)"
 ];
 
+const extractPercentage = (text: string): number => {
+  const match = text.match(/(\d+)%/);
+  return match ? parseInt(match[0]) : 0;
+};
+
 export default function Home() {
   const [gender, setGender] = useState<string>('');
   const [answers, setAnswers] = useState<string[]>(Array(questions.length).fill(''));
@@ -45,7 +50,13 @@ export default function Home() {
         throw new Error(data.error || 'Failed to get prediction');
       }
 
-      setPrediction(data.prediction || 'No prediction received');
+      const predictionText = data.prediction || 'No prediction received';
+      setPrediction(predictionText);
+      
+      // Log the extracted percentage
+      const percentage = extractPercentage(predictionText);
+      console.log('Success Percentage:', percentage + '%');
+
     } catch (error) {
       setError('Failed to get prediction. Please try again.');
       console.error('Error:', error);
