@@ -51,9 +51,9 @@ const handleRequest = async (request: Request) => {
     
         Respond with a JSON object containing these sections only, do not add any extra text:
         {
-          "intro": ${mode === "roast" ? "a brutal opening that roasts their situation" : "a warm, encouraging opening about their situation"},
-          "analysis": ${mode === "roast" ? "savage commentary about their answers, pointing out embarrassing details" : "thoughtful analysis of their chances based on their answers"},
-          "verdict": ${mode === "roast" ? "a hilarious final roast with a 0-100% chance of romantic success" : "a supportive final prediction with a 0-100% chance of success"},
+          "intro": ${mode === "roast" ? "a brutal opening that roasts their situation make it so bad that they would want to give up the chance of ever trying again" : "a warm, encouraging opening about their situation"},
+          "analysis": ${mode === "roast" ? "savage commentary about their answers, pointing out embarrassing details, make all the commentary into a single paragraph make it so bad that they would want to give up the chance of ever trying again" : "thoughtful analysis of their chances based on their answers, make all the analysis into a single paragraph"},
+          "verdict": ${mode === "roast" ? "a hilarious final roast with a 0-100% chance of romantic success, make it so bad that they would want to give up the chance of ever trying again" : "a supportive final prediction with a 0-100% chance of success"},
           "percentage": "a number between 0 and 100 representing their chances",
           "message": "mention the percentage along the appropriate message"
         }`

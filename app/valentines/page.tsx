@@ -5,12 +5,12 @@ import { Heart, ArrowRight, ArrowLeft, Share2, Loader2, Flame, X } from "lucide-
 import { motion, AnimatePresence } from "framer-motion";
 
 const questions = [
-  "What do you like the most about your crush? (e.g., looks, personality, talent, kindness)",
+  "What do you like the most about your crush? (Write anything ,e.g. looks, personality, )",
   "Have you ever talked to them?",
-  "If yes, how do they usually respond? (e.g., friendly, neutral, not interested) If no, type 'Not yet'.",
-  "Do you both have anything in common? (e.g., hobbies, favorite music, same school/college, etc.)",
+  "If no, type 'Not yet', If yes, how do they usually respond? (Write anything , e.g., friendly, neutral, not interested) .",
+  "Do you both have anything in common? (Write anything , e.g. favorite music, same school/college, etc.)",
   "How do you usually act around them? (e.g., nervous, confident, shy, don't see them much)",
-  "How would you feel about confessing to them? (e.g., excited, scared, not sure, never thought about it)",
+  "How would you feel about confessing to them? (Write anything e.g., excited, scared, not sure, never thought about it)",
   "If they rejected you, what would you do? (e.g., move on, stay friends, keep trying, feel heartbroken)",
   "Why do you want them to be your Valentine? (e.g., just a crush, really like them, want to know them better)",
 ];
@@ -508,26 +508,28 @@ export default function Home() {
                 </motion.div>
               </AnimatePresence>
 
-                <div className="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-4 mt-8">
+                <div className="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-4 mt-8">
                 <button
                   onClick={() => {
                   window.location.reload();
                   }}
                   className={`flex-1 py-3 ${
                   mode === "normal"
-                    ? "bg-pink-500 hover:bg-pink-600"
-                    : "bg-red-600 hover:bg-red-700"
+                  ? "bg-pink-500 hover:bg-pink-600"
+                  : "bg-red-600 hover:bg-red-700"
                   } text-white rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200`}
                 >
                   Start Over
                 </button>
-                <button
+                {mode === "normal" && (
+                  <button
                   onClick={() => handleModeSelect("roast")}
                   className="flex-1 py-3 bg-red-600 hover:bg-red-700 text-white rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 flex items-center justify-center"
-                >
+                  >
                   <Flame className="w-5 h-5 mr-2" />
                   Roast Me
-                </button>
+                  </button>
+                )}
                 </div>
             </div>
           </motion.div>
@@ -541,39 +543,42 @@ export default function Home() {
               className="bg-red-950 rounded-lg p-8 max-w-md border-2 border-red-500"
             >
               <div className="flex justify-between items-start mb-4">
-                <h3 className="text-2xl font-bold text-red-500">
-                  ⚠️ Final Warning
-                </h3>
-                <button
-                  onClick={() => setShowRoastDisclaimer(false)}
-                  className="text-red-400 hover:text-red-300"
-                >
-                  <X className="w-6 h-6" />
-                </button>
+          <h3 className="text-2xl font-bold text-red-500">
+            ⚠️ Final Warning
+          </h3>
+          <button
+            onClick={() => setShowRoastDisclaimer(false)}
+            className="text-red-400 hover:text-red-300"
+          >
+            <X className="w-6 h-6" />
+          </button>
               </div>
               <p className="text-red-200 mb-6">
-                You're about to enter the Roast Zone. Our AI has been trained in
-                the art of savage comebacks and brutal honesty. Proceed at your
-                own risk. We are not responsible for any emotional damage caused
-                by the truth (or our savage humor).
+          You're about to enter the Roast Zone. Our AI has been trained in
+          the art of savage comebacks and brutal honesty. Proceed at your
+          own risk. We are not responsible for any emotional damage caused
+          by the truth (or our savage humor).
               </p>
               <div className="flex space-x-4">
-                <button
-                  onClick={() => handleSubmit("roast")}
-                  className="flex-1 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors flex items-center justify-center"
-                >
-                  <Flame className="w-5 h-5 mr-2" />
-                  Roast Me
-                </button>
-                <button
-                  onClick={() => {
-                    setShowRoastDisclaimer(false);
-                    handleSubmit("normal");
-                  }}
-                  className="flex-1 py-2 bg-gray-700 hover:bg-gray-600 text-white rounded-lg transition-colors"
-                >
-                  Nevermind, I'm Scared
-                </button>
+          <button
+            onClick={() => {
+              setIsLoading(true);
+              handleSubmit("roast");
+            }}
+            className="flex-1 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors flex items-center justify-center"
+          >
+            <Flame className="w-5 h-5 mr-2" />
+            {isLoading? "Roasting Loading...":"Roast Me"}
+          </button>
+          <button
+            onClick={() => {
+              setShowRoastDisclaimer(false);
+              handleSubmit("normal");
+            }}
+            className="flex-1 py-2 bg-gray-700 hover:bg-gray-600 text-white rounded-lg transition-colors"
+          >
+            Nevermind, I'm Scared
+          </button>
               </div>
             </motion.div>
           </div>
