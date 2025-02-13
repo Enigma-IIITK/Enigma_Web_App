@@ -73,6 +73,7 @@ async function askGroq(gender: string, answers: any[], mode: "normal" | "roast")
     }
 
     const data = await response.json();
+    console.log(data)
     return {
       intro: data.intro || "Loading your love forecast...",
       analysis: data.analysis || "Analyzing your romantic potential...",
@@ -326,7 +327,7 @@ export default function Home() {
                   <option value="non-binary">
                   penguin
                   </option>
-                  <option value="non-binary">
+                  <option value="non">
                   who are you the cops?
                   </option>
                 </select>
@@ -463,6 +464,7 @@ export default function Home() {
                 <button
                   key={tab}
                   onClick={() => {
+                    console.log(index)
                     setCurrentTab(index);
                     setTabProgress(0);
                   }}
@@ -497,24 +499,36 @@ export default function Home() {
                     <div className="relative">{prediction.analysis}</div>
                   )}
                   {currentTab === 2 && (
-                    <div className="relative">{prediction.verdict}</div>
+                    <div className="relative">
+                      <center>
+                      {prediction.verdict}<br></br>
+                      Your predicted chance is : {prediction.percentage}%</center>
+                    </div>
                   )}
                 </motion.div>
               </AnimatePresence>
 
-              <button
-                onClick={() => {
-                  window.location.reload()
-                }}
-                className={`mt-8 flex items-center justify-center w-full py-3 ${
+                <div className="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-4 mt-8">
+                <button
+                  onClick={() => {
+                  window.location.reload();
+                  }}
+                  className={`flex-1 py-3 ${
                   mode === "normal"
                     ? "bg-pink-500 hover:bg-pink-600"
                     : "bg-red-600 hover:bg-red-700"
-                } text-white rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200`}
-              >
-                
-                Start Over
-              </button>
+                  } text-white rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200`}
+                >
+                  Start Over
+                </button>
+                <button
+                  onClick={() => handleModeSelect("roast")}
+                  className="flex-1 py-3 bg-red-600 hover:bg-red-700 text-white rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 flex items-center justify-center"
+                >
+                  <Flame className="w-5 h-5 mr-2" />
+                  Roast Me
+                </button>
+                </div>
             </div>
           </motion.div>
         )}
