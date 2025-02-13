@@ -81,8 +81,8 @@ export default function Home() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-pink-200 to-purple-300 px-4">
       <main className="w-full max-w-2xl bg-white rounded-2xl shadow-2xl p-6 md:p-10">
-        <h1 className="text-4xl font-extrabold text-center mb-8 text-pink-600 drop-shadow-lg">
-          💖 Valentine Crush Evaluator 💖
+        <h1 className="text-4xl font-serif text-center mb-8 text-pink-600 ">
+          💖 Turing's Rizz 'O' Meter
         </h1>
   
         {currentStep === 0 ? (
