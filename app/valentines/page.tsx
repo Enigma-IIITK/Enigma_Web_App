@@ -10,9 +10,9 @@ const questions = [
   "If yes, how do they usually respond? (e.g., friendly, neutral, not interested) If no, type 'Not yet'.",
   "Do you both have anything in common? (e.g., hobbies, favorite music, same school/college, etc.)",
   "How do you usually act around them? (e.g., nervous, confident, shy, don't see them much)",
-  "How would you feel about confessing to them? (e.g., excited, scared, not sure, never thought about it)",
-  "If they rejected you, what would you do? (e.g., move on, stay friends, keep trying, feel heartbroken)",
-  "Why do you want them to be your Valentine? (e.g., just a crush, really like them, want to know them better)",
+  // "How would you feel about confessing to them? (e.g., excited, scared, not sure, never thought about it)",
+  // "If they rejected you, what would you do? (e.g., move on, stay friends, keep trying, feel heartbroken)",
+  // "Why do you want them to be your Valentine? (e.g., just a crush, really like them, want to know them better)",
 ];
 
 const predefinedAnswers = {
@@ -508,7 +508,7 @@ export default function Home() {
                 </motion.div>
               </AnimatePresence>
 
-                <div className="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-4 mt-8">
+                <div className="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-4 mt-8">
                 <button
                   onClick={() => {
                   window.location.reload();
