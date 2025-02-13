@@ -5,7 +5,34 @@ const groq = new Groq({
   apiKey: process.env.GROQ_API_KEY
 });
 
-export async function POST(request: Request) {
+interface RequestData {
+  request: Request;
+  resolve: (value: NextResponse | PromiseLike<NextResponse>) => void;
+  reject: (reason?: any) => void;
+}
+
+const requestQueue: RequestData[] = [];
+let isProcessingQueue = false;
+
+const processQueue = async () => {
+  if (isProcessingQueue) return;
+  isProcessingQueue = true;
+
+  while (requestQueue.length > 0) {
+    const { request, resolve, reject } = requestQueue.shift()!;
+    try {
+      const response = await handleRequest(request);
+      resolve(response);
+    } catch (error) {
+      reject(error);
+    }
+    await new Promise((resolve) => setTimeout(resolve, 2000)); // 30 requests per minute = 1 request every 2 seconds
+  }
+
+  isProcessingQueue = false;
+};
+
+const handleRequest = async (request: Request) => {
   try {
     const { gender, answers, mode } = await request.json();
 
@@ -28,7 +55,7 @@ export async function POST(request: Request) {
           "analysis": ${mode === "roast" ? "savage commentary about their answers, pointing out embarrassing details" : "thoughtful analysis of their chances based on their answers"},
           "verdict": ${mode === "roast" ? "a hilarious final roast with a 0-100% chance of romantic success" : "a supportive final prediction with a 0-100% chance of success"},
           "percentage": "a number between 0 and 100 representing their chances",
-          "message": "mention the percentage along the appropiate message"
+          "message": "mention the percentage along the appropriate message"
         }`
       }],
       model: "llama3-70b-8192",
@@ -43,4 +70,11 @@ export async function POST(request: Request) {
     console.error('Error:', error);
     return NextResponse.json({ error: 'Failed to get prediction' }, { status: 500 });
   }
+};
+
+export async function POST(request: Request) {
+  return new Promise<NextResponse>((resolve, reject) => {
+    requestQueue.push({ request, resolve, reject });
+    processQueue();
+  });
 }
