@@ -132,13 +132,13 @@ def make_email(news, research):
           </table>
           </td>
         </tr>
-        <!--
+        
         <tr>
           <td style="text-align: center;">
           {enigma_news_content['news']['body']}
           </td>
         </tr>
-        -->
+      
         </table>
       </div>
       -->

@@ -47,7 +47,7 @@ def fetch_and_send_emails():
     # if email_content:
     #     print("generated content")
 
-    # mail.send_email("testmail@gmail.com", email_content)
+    #mail.send_email("test@gmail.com", email_content)
 
    
     #Fetch subscribers and send emails
@@ -60,9 +60,9 @@ def fetch_and_send_emails():
         print(err)
 
 fetch_and_send_emails()
-# schedule.every().week.do(fetch_and_send_emails)
+schedule.every().week.do(fetch_and_send_emails)
 
-# # Keep the script running
-# while True:
-#     schedule.run_pending()
-#     time.sleep(1)
+# Keep the script running
+while True:
+    schedule.run_pending()
+    time.sleep(1)
