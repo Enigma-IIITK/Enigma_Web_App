@@ -94,17 +94,19 @@ def make_email(news, research):
           <p style="font-size: 1rem; margin: 0; margin-top: 5px;">by Enigma ♡</p>
           </td>
           <td align="right" style="padding: 0; margin: 0; text-align: right; vertical-align: middle;">
+          <!--
           <img
             src="https://i.postimg.cc/nzkZW3xv/mascots.png"
             alt="Header Image"
             style="max-width: 100px; height: auto; display: block; margin: 0 auto;"
           />
+          -->
           </td>
         </tr>
         </table>
       </div>
 
-       <!-- Enigma News Section -->
+       <!-- Enigma News Section
       <div class="newsletter-content center-align">
         <table width="100%" cellspacing="0" cellpadding="0" border="0" style="border-collapse: collapse;">
         <tr>
@@ -130,13 +132,16 @@ def make_email(news, research):
           </table>
           </td>
         </tr>
+        <!--
         <tr>
           <td style="text-align: center;">
           {enigma_news_content['news']['body']}
           </td>
         </tr>
+        -->
         </table>
       </div>
+      -->
 
       <!-- Latest Research Section -->
       <div class="newsletter-content center-align">
@@ -211,7 +216,7 @@ def make_email(news, research):
       <!-- Horizontal Line -->
       <hr class="footer-line" />
 
-      <!-- Banner Section -->
+      <!-- Banner Section 
       <div class="banner-section" style="text-align: center;">
         <img
         src="https://i.postimg.cc/nhg97QYV/Enigma-Email-Banner-V1.png"
@@ -220,7 +225,7 @@ def make_email(news, research):
         style="display: block; margin: 0 auto; max-width: 100%;"
         />
       </div>
-
+      -->
       <!-- Footer -->
       <div class="newsletter-footer center-align" style="padding: 0.5rem; text-align: center;">
         <p>Stay connected with us!</p>
